@@ -10,7 +10,7 @@
 }
 
 .vflow-container {
-  display: flex;
+  position: relative;
   width: 100%;
   height: 500px;
 }
@@ -47,4 +47,8 @@
   &_selected {
     border-color: #1b262c;
   }
+}
+
+.without-tab-index {
+  outline: none;
 }

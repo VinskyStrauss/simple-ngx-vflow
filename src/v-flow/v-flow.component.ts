@@ -54,7 +54,6 @@ export class SimpleVflowComponent {
 
   //Create Node
   public createNode({ event }: DndDropEvent) {
-    console.log("Event", event);
     const point = {
       x: event.x,
       y: event.y,
@@ -78,6 +77,12 @@ export class SimpleVflowComponent {
     );
   }
 
+  //Delete Connection
+  public deleteEdge(edge: Edge) {
+    console.log("Edge", edge);
+    this.edges = this.edges.filter((e) => e.id !== edge.id);
+  }
+
   public connect({ source, target }: Connection) {
     this.edges = [
       ...this.edges,
@@ -90,7 +95,7 @@ export class SimpleVflowComponent {
             type: "arrow-closed",
             width: 30,
             height: 30,
-            color: "#ffeeaa",
+            color: "#000000",
           },
         },
       },

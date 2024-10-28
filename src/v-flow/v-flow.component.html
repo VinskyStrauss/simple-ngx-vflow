@@ -31,10 +31,13 @@
     <ng-template edge let-ctx>
       <svg:path
         selectable
+        class="without-tab-index"
         [attr.d]="ctx.path()"
         [attr.stroke]="ctx.selected() ? '#0f4c75' : '#bbe1fa'"
         fill="none"
-        stroke-width="2"
+        stroke-width="5"
+        tabindex="0"
+        (keydown.backspace)="ctx.selected() && deleteEdge(ctx.edge)"
       />
     </ng-template>
   </vflow>
