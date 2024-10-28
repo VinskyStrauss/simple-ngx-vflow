@@ -6,16 +6,30 @@ import { VflowModule, Node, Edge, ColorBackground } from "ngx-vflow";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [VflowModule],
-  template: ` 
-  <div class= "vflow-container">
-  <vflow [nodes]="nodes" [edges]="edges" [background]="solidBackground" view="auto"></vflow> 
-  </div>`,
-  styles
+  template: `
+    <div class="vflow-container">
+      <vflow
+        [nodes]="nodes"
+        [edges]="edges"
+        [background]="solidBackground"
+        view="auto"
+      >
+      </vflow>
+    </div>
+  `,
+  styles: [
+    `
+      .vflow-container {
+        width: 100%;
+        height: 500px;
+      }
+    `,
+  ],
 })
 export class VflowComponent {
   solidBackground: ColorBackground = {
-    type: 'solid',
-    color: 'transparent',
+    type: "solid",
+    color: "transparent",
   };
   public nodes: Node[] = [
     {
@@ -43,13 +57,13 @@ export class VflowComponent {
       id: "1 -> 2",
       source: "1",
       target: "2",
-      curve: 'straight'
+      curve: "straight",
     },
     {
       id: "1 -> 3",
       source: "1",
       target: "3",
-      curve: 'straight'
+      curve: "straight",
     },
   ];
 }
