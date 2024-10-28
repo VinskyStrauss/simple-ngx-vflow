@@ -6,7 +6,11 @@ import { VflowModule, Node, Edge, ColorBackground } from "ngx-vflow";
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [VflowModule],
-  template: ` <vflow [nodes]="nodes" [edges]="edges" [background]="solidBackground" view="auto"></vflow> `,
+  template: ` 
+  <div class= "vflow-container">
+  <vflow [nodes]="nodes" [edges]="edges" [background]="solidBackground" view="auto"></vflow> 
+  </div>`,
+  styles
 })
 export class VflowComponent {
   solidBackground: ColorBackground = {
