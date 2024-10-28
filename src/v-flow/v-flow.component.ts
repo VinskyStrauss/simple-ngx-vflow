@@ -7,6 +7,7 @@ import {
   ColorBackground,
   Connection,
   VflowComponent,
+  Background,
 } from "ngx-vflow";
 import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
 import { myElements } from "../data-example";
@@ -24,7 +25,7 @@ export class SimpleVflowComponent {
 
   readonly myElements = myElements;
 
-  solidBackground: ColorBackground = {
+  backGround: Background = {
     type: "solid",
     color: "transparent",
   };
@@ -84,6 +85,14 @@ export class SimpleVflowComponent {
         id: `${source} -> ${target}`,
         source,
         target,
+        markers: {
+          end: {
+            type: "arrow-closed",
+            width: 30,
+            height: 30,
+            color: "#ffeeaa",
+          },
+        },
       },
     ];
   }
