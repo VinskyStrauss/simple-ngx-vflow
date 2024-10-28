@@ -1,7 +1,24 @@
-<div class="vflow-container">
-  <vflow view="auto" [nodes]="nodes" [edges]="edges">
+<div class="sidebar">
+  <div dndDraggable class="custom-node custom-node_draggable">
+    <button class="custom-node__button">Drag here</button>
+  </div>
+</div>
+
+<div dndDropzone class="vflow-container">
+  <vflow
+    view="auto"
+    dndDropzone
+    (dndDrop)="createNode($event)"
+    (onConnect)="connect($event)"
+    [nodes]="nodes"
+    [edges]="edges"
+  >
     <ng-template nodeHtml let-ctx>
-      <div class="custom-node" [class.custom-node_selected]="ctx.selected()">
+      <div
+        class="custom-node"
+        [class.custom-node_selected]="ctx.selected()"
+        (keydown.backspace)="ctx.selected() && deleteNode(ctx.node)"
+      >
         <button class="custom-node__button" selectable>Select here</button>
 
         <handle type="source" position="right" />

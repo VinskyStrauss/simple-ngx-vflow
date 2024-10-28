@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
-import { DndDropEvent } from "ngx-drag-drop";
+import { DndDropEvent, DndModule } from "ngx-drag-drop";
 import {
   VflowModule,
   Node,
@@ -13,33 +13,23 @@ import {
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [VflowModule],
+  imports: [VflowModule, DndModule],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
 export class SimpleVflowComponent {
+  //Vflow
+  vflow = ViewChild(VflowComponent);
+
   solidBackground: ColorBackground = {
     type: "solid",
     color: "transparent",
   };
   public nodes: Node[] = [
     {
-      id: "1",
+      id: crypto.randomUUID(),
       point: { x: 10, y: 200 },
-      type: "default",
-      text: "1",
-    },
-    {
-      id: "2",
-      point: { x: 200, y: 100 },
-      type: "default",
-      text: "2",
-    },
-    {
-      id: "3",
-      point: { x: 200, y: 300 },
-      type: "default",
-      text: "3",
+      type: "html-template",
     },
   ];
 
@@ -57,4 +47,41 @@ export class SimpleVflowComponent {
       curve: "straight",
     },
   ];
+
+  //Create Node
+  public createNode({ event }: DndDropEvent) {
+    console.log("Event", event);
+    const point = {
+      x: event.x,
+      y: event.y,
+    };
+
+    this.nodes = [
+      ...this.nodes,
+      {
+        id: crypto.randomUUID(),
+        point,
+        type: "html-template",
+      },
+    ];
+  }
+
+  //Delete Node
+  public deleteNode({ id }: Node) {
+    this.nodes = this.nodes.filter((node) => node.id !== id);
+    this.edges = this.edges.filter(
+      (edge) => edge.source !== id && edge.target !== id
+    );
+  }
+
+  public connect({ source, target }: Connection) {
+    this.edges = [
+      ...this.edges,
+      {
+        id: `${source} -> ${target}`,
+        source,
+        target,
+      },
+    ];
+  }
 }
