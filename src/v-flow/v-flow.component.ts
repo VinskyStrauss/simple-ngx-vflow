@@ -1,32 +1,23 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { VflowModule, Node, Edge, ColorBackground } from "ngx-vflow";
+import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
+import { DndDropEvent } from "ngx-drag-drop";
+import {
+  VflowModule,
+  Node,
+  Edge,
+  ColorBackground,
+  Connection,
+  VflowComponent,
+} from "ngx-vflow";
 
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [VflowModule],
-  template: `
-    <div class="vflow-container">
-      <vflow
-        [nodes]="nodes"
-        [edges]="edges"
-        [background]="solidBackground"
-        view="auto"
-      >
-      </vflow>
-    </div>
-  `,
-  styles: [
-    `
-      .vflow-container {
-        width: 100%;
-        height: 500px;
-      }
-    `,
-  ],
+  templateUrl: "./v-flow.component.html",
+  styleUrl: "./v-flow.component.scss",
 })
-export class VflowComponent {
+export class SimpleVflowComponent {
   solidBackground: ColorBackground = {
     type: "solid",
     color: "transparent",
