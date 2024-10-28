@@ -90,6 +90,7 @@ export class SimpleVflowComponent {
         id: `${source} -> ${target}`,
         source,
         target,
+        curve: "straight",
         markers: {
           end: {
             type: "arrow-closed",
