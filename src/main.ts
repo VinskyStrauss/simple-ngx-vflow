@@ -7,8 +7,17 @@ import { VflowComponent } from './v-flow/v-flow.component';
   standalone: true,
   imports: [VflowComponent],
   template: `
+    <h1> Ngx-vflow with GeoJSON </h1>
+    <div class="vflow-container">
     <app-vflow></app-vflow>
+    </div>
   `,
+  styles: `
+  .vflow-container {
+    width: 100%;
+    height: 500px;
+  }
+`,
 })
 export class App {
   name = 'Angular';

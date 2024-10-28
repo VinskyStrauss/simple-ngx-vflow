@@ -1,14 +1,18 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { VflowModule, Node, Edge } from "ngx-vflow";
+import { VflowModule, Node, Edge, ColorBackground } from "ngx-vflow";
 
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [VflowModule],
-  template: ` <vflow [nodes]="nodes" [edges]="edges"></vflow> `,
+  template: ` <vflow [nodes]="nodes" [edges]="edges" [background]="solidBackground" view="auto"></vflow> `,
 })
 export class VflowComponent {
+  solidBackground: ColorBackground = {
+    type: 'solid',
+    color: 'transparent',
+  };
   public nodes: Node[] = [
     {
       id: "1",
@@ -35,11 +39,13 @@ export class VflowComponent {
       id: "1 -> 2",
       source: "1",
       target: "2",
+      curve: 'straight'
     },
     {
       id: "1 -> 3",
       source: "1",
       target: "3",
+      curve: 'straight'
     },
   ];
 }
