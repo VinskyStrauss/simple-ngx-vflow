@@ -41,7 +41,7 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
 
       @for(element of elements(); track $index) {
 
-      <svg:g my-element [element]="element"></svg:g>
+      <svg:g custom-element [element]="element"></svg:g>
 
       }
     </svg>

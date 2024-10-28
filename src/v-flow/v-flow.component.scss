@@ -11,8 +11,11 @@
 }
 
 .vflow-container {
+  display: flex;
+  position: relative;
   width: 100%;
-  height: 500px;
+  height: 400px;
+  z-index: 1;
 }
 
 .custom-node {

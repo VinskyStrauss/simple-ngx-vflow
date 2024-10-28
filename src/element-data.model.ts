@@ -1,5 +1,4 @@
 export interface ElementData {
-    name: string;
-    myGeoJson: GeoJSON.GeoJSON;
-  }
-  
+  name: string;
+  myGeoJson: GeoJSON.GeoJSON;
+}

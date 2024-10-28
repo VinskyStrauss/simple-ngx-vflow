@@ -8,18 +8,21 @@ import {
   Connection,
   VflowComponent,
 } from "ngx-vflow";
-
+import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
+import { myElements } from "../data-example";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [VflowModule, DndModule],
+  imports: [VflowModule, DndModule, BackgroundSvgComponent],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
 export class SimpleVflowComponent {
   //Vflow
   vflow = ViewChild(VflowComponent);
+
+  readonly myElements = myElements;
 
   solidBackground: ColorBackground = {
     type: "solid",
