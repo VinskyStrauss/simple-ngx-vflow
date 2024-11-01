@@ -11,11 +11,17 @@ import {
 } from "ngx-vflow";
 import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
 import { myElements } from "../data-example";
+import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.component";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [VflowModule, DndModule, BackgroundSvgComponent],
+  imports: [
+    VflowModule,
+    DndModule,
+    BackgroundSvgComponent,
+    AlexanderPlatzSvgComponent,
+  ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
@@ -29,28 +35,9 @@ export class SimpleVflowComponent {
     type: "solid",
     color: "transparent",
   };
-  public nodes: Node[] = [
-    {
-      id: crypto.randomUUID(),
-      point: { x: 10, y: 200 },
-      type: "html-template",
-    },
-  ];
+  public nodes: Node[] = [];
 
-  public edges: Edge[] = [
-    {
-      id: "1 -> 2",
-      source: "1",
-      target: "2",
-      curve: "straight",
-    },
-    {
-      id: "1 -> 3",
-      source: "1",
-      target: "3",
-      curve: "straight",
-    },
-  ];
+  public edges: Edge[] = [];
 
   //Create Node
   public createNode({ event }: DndDropEvent) {

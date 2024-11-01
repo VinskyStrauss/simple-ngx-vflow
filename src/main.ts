@@ -15,7 +15,6 @@ import { SimpleVflowComponent } from "./v-flow/v-flow.component";
   styles: `
   .vflow-container {
     width: 100%;
-    
   }
 `,
 })
