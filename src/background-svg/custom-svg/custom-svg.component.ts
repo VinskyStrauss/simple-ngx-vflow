@@ -30,8 +30,8 @@ export class CustomSvgComponent {
   private sanitizer = inject(DomSanitizer);
 
   converter = new GeoJSON2SVG({
-    mapExtent: { left: -180, bottom: -90, right: 180, top: 90 },
-    viewportSize: { width: 1000, height: 1000 },
+    mapExtent: { left: -337, bottom: -255, right: 337, top: 255 },
+    viewportSize: { width: 674, height: 551 },
     // attributes: ["properties.class", "properties.foo"],
     r: 10,
   });
