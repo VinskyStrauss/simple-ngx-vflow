@@ -8,7 +8,7 @@ export const myElements: ElementData[] = [
       type: "Feature",
       properties: {},
       geometry: {
-        coordinates: [13.4127945253164, 52.522834561843354],
+        coordinates: [13.412792896517743, 52.522818469094005],
         type: "Point",
       },
     },

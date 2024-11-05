@@ -44,16 +44,27 @@ export class CustomSvgComponent {
   //Change the latitute and longitude to x and y based on the parent svg width and height
   convertCoordinateToPixel(geoJson: any) {
     console.log("geoJson", geoJson);
+
     // Extract coordinates from the GeoJSON
     const [longitude, latitude] = geoJson.geometry.coordinates;
-    //Convert longitude
-    let x = (longitude + 180) * (674 / 360);
-    //Convert latitude
-    // convert from degrees to radians
+
+    // SVG dimensions and viewBox parameters
+    const svgWidth = 674; // SVG width in pixels
+    const svgHeight = 551; // SVG height in pixels
+    const viewBoxX = 126; // X-coordinate of the viewBox origin
+    const viewBoxY = 83; // Y-coordinate of the viewBox origin
+
+    // Step 1: Convert longitude to X in viewBox coordinates
+    let x = (longitude + 180) * (svgWidth / 360) + viewBoxX;
+
+    // Step 2: Convert latitude to Y in viewBox coordinates
+    // Convert from degrees to radians
     let latRad = (latitude * Math.PI) / 180;
-    // get y value
+
+    // Use Mercator projection for Y conversion
     let mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
-    let y = 551 / 2 - (674 * mercN) / (2 * Math.PI);
+    let y = svgHeight / 2 - (svgWidth * mercN) / (2 * Math.PI) + viewBoxY;
+
     console.log("x", x, "y", y);
     return { x, y };
   }
