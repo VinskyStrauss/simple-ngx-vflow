@@ -45,28 +45,40 @@ export class CustomSvgComponent {
   convertCoordinateToPixel(geoJson: any) {
     console.log("geoJson", geoJson);
 
-    // Extract coordinates from the GeoJSON
-    const [longitude, latitude] = geoJson.geometry.coordinates;
-
     // SVG dimensions and viewBox parameters
     const svgWidth = 674; // SVG width in pixels
     const svgHeight = 551; // SVG height in pixels
     const viewBoxX = 126; // X-coordinate of the viewBox origin
     const viewBoxY = 83; // Y-coordinate of the viewBox origin
 
-    // Step 1: Convert longitude to X in viewBox coordinates
-    let x = (longitude + 180) * (svgWidth / 360) + viewBoxX;
+    // Check if `coordinates` is a single pair or an array of pairs
+    const coordinates = geoJson.geometry.coordinates;
 
-    // Step 2: Convert latitude to Y in viewBox coordinates
-    // Convert from degrees to radians
-    let latRad = (latitude * Math.PI) / 180;
+    // Helper function to convert a single coordinate pair to pixels
+    const convertSingleCoordinate = ([longitude, latitude]: [
+      number,
+      number
+    ]) => {
+      // Convert longitude to X in viewBox coordinates
+      let x = (longitude + 180) * (svgWidth / 360) + viewBoxX;
 
-    // Use Mercator projection for Y conversion
-    let mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
-    let y = svgHeight / 2 - (svgWidth * mercN) / (2 * Math.PI) + viewBoxY;
+      // Convert latitude to Y in viewBox coordinates
+      let latRad = (latitude * Math.PI) / 180; // Convert latitude to radians
+      let mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
+      let y = svgHeight / 2 - (svgWidth * mercN) / (2 * Math.PI) + viewBoxY;
+      console.log("x", x, "y", y);
+      return { x, y };
+    };
 
-    console.log("x", x, "y", y);
-    return { x, y };
+    // If the coordinates represent a single point (e.g., [longitude, latitude])
+    if (typeof coordinates[0] === "number") {
+      return convertSingleCoordinate(coordinates as [number, number]);
+    }
+
+    // If the coordinates represent multiple points (e.g., [[longitude, latitude], [longitude, latitude], ...])
+    return coordinates.map((coord: [number, number]) =>
+      convertSingleCoordinate(coord)
+    );
   }
 
   mySvg = computed(() => {

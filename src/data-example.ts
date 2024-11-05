@@ -14,6 +14,17 @@ export const myElements: ElementData[] = [
     },
   },
   {
+    name: "Fernsehturm",
+    myGeoJson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [13.40940529404699, 52.52081096331179],
+        type: "Point",
+      },
+    },
+  },
+  {
     name: "Samui to Fernsehturm",
     myGeoJson: {
       type: "Feature",
