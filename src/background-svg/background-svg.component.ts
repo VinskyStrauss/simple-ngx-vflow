@@ -15,9 +15,9 @@ import { AlexanderPlatzSvgComponent } from "./alexander-svg.component";
       <
 
       <!-- Render the alexander-svg component within an SVG foreignObject -->
-      <foreignObject x="0" y="0" width="100%" height="100%">
+      <!-- <foreignObject x="0" y="0" width="100%" height="100%">
         <alexander-svg></alexander-svg>
-      </foreignObject>
+      </foreignObject> -->
 
       @for(element of elements(); track $index) {
 

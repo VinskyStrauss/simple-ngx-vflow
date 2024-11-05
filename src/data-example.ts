@@ -14,14 +14,14 @@ export const myElements: ElementData[] = [
     },
   },
   {
-    name: "Samui to Tram Station",
+    name: "Samui to Fernsehturm",
     myGeoJson: {
       type: "Feature",
       properties: {},
       geometry: {
         coordinates: [
-          [13.413736395618656, 52.521961655245946],
-          [13.413911047065483, 52.52157832991165],
+          [13.413752941809634, 52.52192283390457],
+          [13.409427403801828, 52.5207948590847],
         ],
         type: "LineString",
       },
