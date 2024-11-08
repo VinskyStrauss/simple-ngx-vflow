@@ -58,7 +58,7 @@ export class CustomSvgComponent {
   // Reactive accessor for GeoJSON data
   myGeoJson = computed(() => this.element.myGeoJson);
 
-  // Convert GeoJSON coordinates to pixels based on SVG dimensions and viewBox
+  // TODO: REMOVE THIS FUNCTION Convert GeoJSON coordinates to pixels based on SVG dimensions and viewBox
   convertCoordinateToPixel(geoJson: any) {
     const svgWidth = 674;
     const svgHeight = 551;
