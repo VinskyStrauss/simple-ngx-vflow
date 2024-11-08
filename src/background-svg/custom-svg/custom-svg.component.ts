@@ -42,12 +42,13 @@ export class CustomSvgComponent {
     r: 5,
   });
 
+  //Converter for the darmstadt grafenhauser map
   darmstadtConverter = new GeoJSON2SVG({
     mapExtent: {
-      left: 8.633977819941293, // longitude for top-left corner
-      bottom: 49.88357408125191, // latitude for bottom-right corner
-      right: 8.638505167979758, // longitude for bottom-right corner
-      top: 49.88613247128754, // latitude for top-left corner
+      left: 8.634022529410913, // longitude for top-left corner
+      bottom: 49.8835094952137, // latitude for bottom-right corner
+      right: 8.638534952430376, // longitude for bottom-right corner
+      top: 49.88613737107883, // latitude for top-left corner
     },
     viewportSize: { width: 1220, height: 1069 },
     explode: true,
