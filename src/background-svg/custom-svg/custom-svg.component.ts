@@ -4,7 +4,7 @@ import {
   computed,
   HostBinding,
   inject,
-  input,
+  Input,
 } from "@angular/core";
 import { ElementData } from "../../element-data.model";
 import { GeoJSON2SVG } from "geojson2svg";
@@ -18,7 +18,7 @@ import { DomSanitizer } from "@angular/platform-browser";
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
       :host { 
-          display: contents
+          display: contents;
       }
     `,
   host: {
@@ -26,48 +26,45 @@ import { DomSanitizer } from "@angular/platform-browser";
   },
 })
 export class CustomSvgComponent {
-  element = input.required<ElementData>();
+  @Input() element!: ElementData; // Assume ElementData includes myGeoJson property
   private sanitizer = inject(DomSanitizer);
+
+  // Configure GeoJSON2SVG with map extent and viewport based on your SVG viewBox
   converter = new GeoJSON2SVG({
-    mapExtent: { left: -337, bottom: -255, right: 337, top: 255 },
+    mapExtent: {
+      left: 13.407647596596377, // longitude for top-left corner
+      bottom: 52.519272639839926, // latitude for bottom-right corner
+      right: 13.414813166706523, // longitude for bottom-right corner
+      top: 52.52330727598482, // latitude for top-left corner
+    },
     viewportSize: { width: 674, height: 551 },
-    // attributes: ["properties.class", "properties.foo"],
-    mapExtentFromGeojson: true,
     explode: true,
     r: 5,
   });
 
-  myGeoJson = computed<GeoJSON.GeoJSON | GeoJSON.GeometryCollection>(
-    () => this.element().myGeoJson
-  );
+  // Reactive accessor for GeoJSON data
+  myGeoJson = computed(() => this.element.myGeoJson);
 
-  //Change the latitute and longitude to x and y based on the parent svg width and height
+  // Convert GeoJSON coordinates to pixels based on SVG dimensions and viewBox
   convertCoordinateToPixel(geoJson: any) {
-    console.log("geoJson", geoJson);
+    const svgWidth = 674;
+    const svgHeight = 551;
+    const viewBoxX = 126;
+    const viewBoxY = 83;
 
-    // SVG dimensions and viewBox parameters
-    const svgWidth = 674; // SVG width in pixels
-    const svgHeight = 551; // SVG height in pixels
-    const viewBoxX = 126; // X-coordinate of the viewBox origin
-    const viewBoxY = 83; // Y-coordinate of the viewBox origin
-
-    // Check if `coordinates` is a single pair or an array of pairs
     const coordinates = geoJson.geometry.coordinates;
 
-    // Helper function to convert a single coordinate pair to pixels
     const convertSingleCoordinate = ([longitude, latitude]: [
       number,
       number
     ]) => {
-      // Convert longitude to X in viewBox coordinates
-      let x = (longitude + 180) * (svgWidth / 360) + viewBoxX;
+      const x = ((longitude + 180) / 360) * svgWidth + viewBoxX;
 
-      // Convert latitude to Y in viewBox coordinates
-      let latRad = (latitude * Math.PI) / 180; // Convert latitude to radians
-      let mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
-      let y = svgHeight / 2 - (svgWidth * mercN) / (2 * Math.PI) + viewBoxY;
-      console.log("x", x, "y", y);
-      return { x, y };
+      const latRad = (latitude * Math.PI) / 180;
+      const mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
+      const y = svgHeight / 2 - (svgWidth * mercN) / (2 * Math.PI) + viewBoxY;
+      console.log(x, y);
+      return [x, y];
     };
 
     // If the coordinates represent a single point (e.g., [longitude, latitude])
@@ -81,16 +78,27 @@ export class CustomSvgComponent {
     );
   }
 
+  // Generate SVG path data from GeoJSON and render it as SVG
   mySvg = computed(() => {
-    console.log("myGeoJson", this.myGeoJson());
-    this.convertCoordinateToPixel(this.myGeoJson());
+    console.log(this.myGeoJson());
+    //Transforming the GeoJson coordinates to pixel coordinates
+    const myGeoJSON = this.myGeoJson() as any;
+    const transformedGeoJson = {
+      ...myGeoJSON,
+      geometry: {
+        ...myGeoJSON.geometry,
+        coordinates: this.convertCoordinateToPixel(this.myGeoJson()),
+      },
+    };
+    console.log("After Transform", transformedGeoJson);
     const svgPaths = this.converter.convert(this.myGeoJson());
-    console.log("svgPaths", svgPaths.join(""));
+    console.log("SVGPaths", svgPaths);
+    const svgTransformedPaths = this.converter.convert(transformedGeoJson);
+    console.log("SVGPaths Transformed", svgTransformedPaths);
+    // Sanitizing the SVG paths
     const sanitizedPath = this.sanitizer.bypassSecurityTrustHtml(
       svgPaths.join("")
     );
-    console.log("sanitizedPath", sanitizedPath);
     return sanitizedPath;
-    // return this.sanitizer.bypassSecurityTrustHtml(svgPaths.join(""));
   });
 }

@@ -12,6 +12,7 @@ import {
 import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
 import { myElements } from "../data-example";
 import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.component";
+import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +22,7 @@ import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.comp
     DndModule,
     BackgroundSvgComponent,
     AlexanderPlatzSvgComponent,
+    GrafenHauserComponent,
   ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
@@ -28,6 +30,7 @@ import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.comp
 export class SimpleVflowComponent {
   //Vflow
   vflow = ViewChild(VflowComponent);
+  imagePath = "assets/grafen.png";
 
   readonly myElements = myElements;
 
