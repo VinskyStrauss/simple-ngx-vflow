@@ -42,6 +42,18 @@ export class CustomSvgComponent {
     r: 5,
   });
 
+  darmstadtConverter = new GeoJSON2SVG({
+    mapExtent: {
+      left: 8.633977819941293, // longitude for top-left corner
+      bottom: 49.88357408125191, // latitude for bottom-right corner
+      right: 8.638505167979758, // longitude for bottom-right corner
+      top: 49.88613247128754, // latitude for top-left corner
+    },
+    viewportSize: { width: 1220, height: 1069 },
+    explode: true,
+    r: 10,
+  });
+
   // Reactive accessor for GeoJSON data
   myGeoJson = computed(() => this.element.myGeoJson);
 
@@ -91,9 +103,10 @@ export class CustomSvgComponent {
       },
     };
     console.log("After Transform", transformedGeoJson);
-    const svgPaths = this.converter.convert(this.myGeoJson());
+    const svgPaths = this.darmstadtConverter.convert(this.myGeoJson());
     console.log("SVGPaths", svgPaths);
-    const svgTransformedPaths = this.converter.convert(transformedGeoJson);
+    const svgTransformedPaths =
+      this.darmstadtConverter.convert(transformedGeoJson);
     console.log("SVGPaths Transformed", svgTransformedPaths);
     // Sanitizing the SVG paths
     const sanitizedPath = this.sanitizer.bypassSecurityTrustHtml(

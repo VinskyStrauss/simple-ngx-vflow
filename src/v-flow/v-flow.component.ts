@@ -13,6 +13,7 @@ import { BackgroundSvgComponent } from "../background-svg/background-svg.compone
 import { myElements } from "../data-example";
 import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.component";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
+import { darmstadtElements } from "../darmstadt-data";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,9 +31,9 @@ import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.compon
 export class SimpleVflowComponent {
   //Vflow
   vflow = ViewChild(VflowComponent);
-  imagePath = "assets/grafen.png";
 
   readonly myElements = myElements;
+  readonly darmstadtElements = darmstadtElements;
 
   backGround: Background = {
     type: "solid",
