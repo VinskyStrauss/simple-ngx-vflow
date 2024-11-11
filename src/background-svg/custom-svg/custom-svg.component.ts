@@ -11,6 +11,7 @@ import { GeoJSON2SVG } from "geojson2svg";
 import { DomSanitizer } from "@angular/platform-browser";
 import reproject from "reproject";
 import proj4 from "proj4";
+import { toMercator, toWgs84 } from "@turf/projection";
 
 @Component({
   selector: "svg:g[custom-element]",
@@ -33,9 +34,13 @@ export class CustomSvgComponent {
 
   //Converter for the darmstadt grafenhauser map
   darmstadtConverter = new GeoJSON2SVG({
+    /* mapExtent: {
+      left: 8.634022529410913, // longitude for top-left corner
+      bottom: 49.8835094952137, // latitude for bottom-right corner
+      right: 8.638534952430376, // longitude for bottom-right corner
+      top: 49.88613737107883, // latitude for top-left corner
+    }, */
     viewportSize: { width: 1220, height: 1069 },
-    mapExtentFromGeojson: true,
-    explode: true,
     r: 10,
   });
 
@@ -55,7 +60,11 @@ export class CustomSvgComponent {
       proj4.defs
     );
     console.log("Reprojected", reprojected);
-    const svgPaths = this.darmstadtConverter.convert(reprojected);
+    //Convert with turf
+    // Optionally convert GeoJSON to WGS84 format
+    const convertedToMercator = toMercator(myGeoJSON);
+    console.log("Converted to WGS84", convertedToMercator);
+    const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
     console.log("SVGPaths", svgPaths);
 
     // Sanitizing the SVG paths
