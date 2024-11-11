@@ -52,25 +52,20 @@ export class CustomSvgComponent {
     console.log(this.myGeoJson());
     //Transforming the GeoJson coordinates to pixel coordinates
     const myGeoJSON = this.myGeoJson() as any;
-    //Create a reproject, to convert he coordinates to other coordinates
-    const reprojected = reproject.reproject(
-      this.myGeoJson(),
-      "EPSG:4326",
-      "EPSG:3857",
-      proj4.defs
-    );
-    console.log("Reprojected", reprojected);
+
     //Convert with turf
     // Optionally convert GeoJSON to WGS84 format
     const convertedToMercator = toMercator(myGeoJSON);
-    console.log("Converted to WGS84", convertedToMercator);
+    console.log("Converted to Mercator", convertedToMercator);
     const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
     console.log("SVGPaths", svgPaths);
 
+    const transformedSvg = `<g transform="scale(0.25)" transform-origin="center">
+    ${svgPaths.join("")}
+  </g>`;
     // Sanitizing the SVG paths
-    const sanitizedPath = this.sanitizer.bypassSecurityTrustHtml(
-      svgPaths.join("")
-    );
+    const sanitizedPath =
+      this.sanitizer.bypassSecurityTrustHtml(transformedSvg);
     return sanitizedPath;
   });
 }

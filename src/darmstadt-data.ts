@@ -26,7 +26,21 @@ export const darmstadtElements: ElementData[] = [
       },
     },
   },
-  /*   {
+  /* {
+    name: "Aulbach",
+    myGeoJson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [
+          [8.63496448861622, 49.88399603363371],
+          [8.635598852023378, 49.88486200887846],
+        ],
+        type: "LineString",
+      },
+    },
+  }, */
+  /* {
     name: "SR Parkett",
     myGeoJson: {
       type: "Feature",
