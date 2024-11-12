@@ -40,7 +40,7 @@ export const darmstadtElements: ElementData[] = [
       },
     },
   }, */
-  /* {
+  {
     name: "SR Parkett",
     myGeoJson: {
       type: "Feature",
@@ -58,5 +58,32 @@ export const darmstadtElements: ElementData[] = [
         type: "Polygon",
       },
     },
-  }, */
+  },
+  {
+    name: "Kita",
+    myGeoJson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [
+          [8.63461745058359, 49.88559109355839],
+          [8.634852248331839, 49.885508727787766],
+          [8.634883554698263, 49.88555075115764],
+          [8.6346565835413, 49.88563143592603],
+        ],
+        type: "LineString",
+      },
+    },
+  },
+  {
+    name: "Point",
+    myGeoJson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [8.63559316567057, 49.885696992200366],
+        type: "Point",
+      },
+    },
+  },
 ];

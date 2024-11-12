@@ -6,12 +6,7 @@ import { AlexanderPlatzSvgComponent } from "./alexander-svg.component";
   selector: "grafen-background-svg",
   standalone: true,
   template: `
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 1220 1069"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
       <image href="assets/grafen.png" alt="Grafen" class="grafen-image" />
       @for(element of elements(); track $index) {
 
