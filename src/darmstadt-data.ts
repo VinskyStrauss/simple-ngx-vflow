@@ -86,4 +86,18 @@ export const darmstadtElements: ElementData[] = [
       },
     },
   },
+  {
+    name: "Line Lidl to Office",
+    myGeoJson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [
+          [8.6341733164966, 49.88587457791547],
+          [8.63570281452948, 49.8850381810048],
+        ],
+        type: "LineString",
+      },
+    },
+  },
 ];
