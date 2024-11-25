@@ -12,19 +12,6 @@
     [maxZoom]="25"
     [minZoom]="-25"
   >
-    <ng-template nodeHtml let-ctx>
-      <div
-        class="custom-node"
-        [class.custom-node_selected]="ctx.selected()"
-        (keydown.backspace)="ctx.selected() && deleteNode(ctx.node)"
-      >
-        <button class="custom-node__button" selectable>Select here</button>
-
-        <handle type="source" position="right" id="a" />
-        <handle type="target" position="left" id="b" />
-      </div>
-    </ng-template>
-
     <ng-template edge let-ctx>
       <svg:path
         selectable

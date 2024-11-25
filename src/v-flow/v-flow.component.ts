@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal,
+  ViewChild,
+} from "@angular/core";
 import { DndDropEvent, DndModule } from "ngx-drag-drop";
 import {
   VflowModule,
@@ -11,10 +18,11 @@ import {
   ConnectionSettings,
 } from "ngx-vflow";
 import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
-import { myElements } from "../data-example";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
-import { CustomNodesComponent } from "./custom-node/custom-node.component";
+import { ScopeNodeComponent } from "./scope-node/scope-node.component";
+import { FeatureModel } from "../model/feature.model";
+import { mockDarmstadtData } from "../mock-data";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,9 +34,11 @@ import { CustomNodesComponent } from "./custom-node/custom-node.component";
 export class SimpleVflowComponent {
   //Vflow
   vflow = ViewChild(VflowComponent);
-
-  readonly myElements = myElements;
+  //vFlow nodes
+  vNodes = signal<Node[]>([]);
   readonly darmstadtElements = darmstadtElements;
+
+  readonly mockData = mockDarmstadtData;
 
   backGround: Background = {
     type: "solid",
@@ -38,25 +48,37 @@ export class SimpleVflowComponent {
   connectionSetting: ConnectionSettings = {
     mode: "loose",
   };
-  public nodes: Node[] = [];
+
+  public nodes: Node[] = [
+    // Map the nodes from the input data
+    ...this.mockData.map((feature) => {
+      console.log("Mapping feature to node:", feature); // Log the feature being processed
+      const node = this.createNode(feature); // Create the node
+      console.log("Created node:", node); // Log the created node
+      return node;
+    }),
+    /*  {
+      id: "1",
+      point: { x: 100, y: 100 },
+      type: "default",
+    },
+    {
+      id: "2",
+      point: { x: 200, y: 200 },
+      type: "default",
+    }, */
+  ];
 
   public edges: Edge[] = [];
 
   //Create Node
-  public createNode({ event }: DndDropEvent) {
-    const point = {
-      x: event.x,
-      y: event.y,
+  public createNode(feature: FeatureModel): Node {
+    return {
+      id: crypto.randomUUID(),
+      data: { feature },
+      point: { x: 100, y: 100 },
+      type: ScopeNodeComponent,
     };
-
-    this.nodes = [
-      ...this.nodes,
-      {
-        id: crypto.randomUUID(),
-        point,
-        type: CustomNodesComponent,
-      },
-    ];
   }
 
   //Delete Node

@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { SimpleVflowComponent } from "./v-flow/v-flow.component";
+import { mockDarmstadtData } from "./mock-data";
 
 @Component({
   selector: "app-root",
@@ -18,8 +19,12 @@ import { SimpleVflowComponent } from "./v-flow/v-flow.component";
   }
 `,
 })
-export class App {
-  name = "Angular";
+export class App implements OnInit {
+  ngOnInit(): void {
+    console.log("App initialized");
+    console.log("Mock data:", this.mockData);
+  }
+  readonly mockData = mockDarmstadtData;
 }
 
 bootstrapApplication(App);
