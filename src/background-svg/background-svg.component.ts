@@ -1,7 +1,6 @@
 import { Component, input } from "@angular/core";
-import { ElementData } from "../element-data.model";
+import { ElementData } from "../model/element-data.model";
 import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
-import { AlexanderPlatzSvgComponent } from "./alexander-svg.component";
 @Component({
   selector: "app-background-svg",
   standalone: true,
@@ -38,7 +37,7 @@ import { AlexanderPlatzSvgComponent } from "./alexander-svg.component";
       }
     `,
   ],
-  imports: [CustomSvgComponent, AlexanderPlatzSvgComponent],
+  imports: [CustomSvgComponent],
 })
 export class BackgroundSvgComponent {
   elements = input<ElementData[]>();

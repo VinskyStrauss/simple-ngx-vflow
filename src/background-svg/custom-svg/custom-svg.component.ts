@@ -6,7 +6,7 @@ import {
   inject,
   Input,
 } from "@angular/core";
-import { ElementData } from "../../element-data.model";
+import { ElementData } from "../../model/element-data.model";
 import { GeoJSON2SVG } from "geojson2svg";
 import { DomSanitizer } from "@angular/platform-browser";
 import reproject from "reproject";

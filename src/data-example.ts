@@ -1,4 +1,4 @@
-import { ElementData } from "./element-data.model";
+import { ElementData } from "./model/element-data.model";
 
 // Example of MyElement array
 export const myElements: ElementData[] = [

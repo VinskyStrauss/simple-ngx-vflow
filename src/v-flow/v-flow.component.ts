@@ -8,23 +8,18 @@ import {
   Connection,
   VflowComponent,
   Background,
+  ConnectionSettings,
 } from "ngx-vflow";
 import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
 import { myElements } from "../data-example";
-import { AlexanderPlatzSvgComponent } from "../background-svg/alexander-svg.component";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
+import { CustomNodesComponent } from "./custom-node/custom-node.component";
 @Component({
   selector: "app-vflow",
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    VflowModule,
-    DndModule,
-    BackgroundSvgComponent,
-    AlexanderPlatzSvgComponent,
-    GrafenHauserComponent,
-  ],
+  imports: [VflowModule, BackgroundSvgComponent, GrafenHauserComponent],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
@@ -38,6 +33,10 @@ export class SimpleVflowComponent {
   backGround: Background = {
     type: "solid",
     color: "transparent",
+  };
+
+  connectionSetting: ConnectionSettings = {
+    mode: "loose",
   };
   public nodes: Node[] = [];
 
@@ -55,7 +54,7 @@ export class SimpleVflowComponent {
       {
         id: crypto.randomUUID(),
         point,
-        type: "html-template",
+        type: CustomNodesComponent,
       },
     ];
   }
@@ -75,6 +74,7 @@ export class SimpleVflowComponent {
   }
 
   public connect({ source, target }: Connection) {
+    console.log("Connect", source, target);
     this.edges = [
       ...this.edges,
       {

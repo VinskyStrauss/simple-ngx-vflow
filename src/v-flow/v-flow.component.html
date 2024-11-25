@@ -1,18 +1,11 @@
-<div class="sidebar">
-  <div dndDraggable class="custom-node custom-node_draggable">
-    <button class="custom-node__button">Drag here</button>
-  </div>
-</div>
-
-<div dndDropzone class="vflow-container">
+<div class="vflow-container">
   <!-- <alexander-svg [elements]="myElements"></alexander-svg> -->
   <grafen-background-svg [elements]="darmstadtElements"></grafen-background-svg>
   <!-- <app-background-svg [elements]="myElements"></app-background-svg> -->
   <vflow
     view="auto"
-    dndDropzone
-    (dndDrop)="createNode($event)"
     (onConnect)="connect($event)"
+    [connection]="connectionSetting"
     [nodes]="nodes"
     [edges]="edges"
     [background]="backGround"
@@ -27,8 +20,8 @@
       >
         <button class="custom-node__button" selectable>Select here</button>
 
-        <handle type="source" position="right" />
-        <handle type="target" position="left" />
+        <handle type="source" position="right" id="a" />
+        <handle type="target" position="left" id="b" />
       </div>
     </ng-template>
 
