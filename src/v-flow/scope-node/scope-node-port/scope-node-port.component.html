@@ -3,13 +3,7 @@
   @for (port of ports; track $index) {
   <div class="port">
     @if (editMode()) {
-    <div
-      class="port-name"
-      [style.background-color]="
-        port.type.connectionType?.color ||
-        port.type.connectionType?.colorInherited
-      "
-    >
+    <div class="port-name">
       {{ port.name }}
     </div>
     }
@@ -19,8 +13,7 @@
       [id]="port.id"
       [template]="handleTemplate"
     />
-    @let color = port.type.connectionType?.color ||
-    port.type.connectionType?.colorInherited; @let name = port.name;
+    @let name = port.name;
     <ng-template #handleTemplate let-ctx>
       <svg:rect
         [attr.x]="ctx.point().x - 6"
@@ -28,8 +21,8 @@
         [attr.width]="12"
         [attr.height]="12"
         stroke-width="1"
-        [attr.stroke]="color || 'gray'"
-        [attr.fill]="color || 'gray'"
+        [attr.stroke]="'gray'"
+        [attr.fill]="'gray'"
         (mousedown)="onHandleMouseDown()"
       />
     </ng-template>
