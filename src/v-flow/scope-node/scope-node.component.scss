@@ -1,4 +1,29 @@
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+}
+
+.node {
+  position: relative;
+  background-color: transparent;
+  border: 3px solid black;
+
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+
+  &:hover {
+    .actions {
+      display: flex;
+    }
+  }
+
+  // Indicate to the user node will be deleted
+  &:has(.delete:hover) {
+    opacity: 0.5;
+  }
 }

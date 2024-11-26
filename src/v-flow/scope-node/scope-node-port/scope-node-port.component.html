@@ -1,0 +1,39 @@
+@let ports = nodePorts(); @if (ports) {
+<div class="ports">
+  @for (port of ports; track $index) {
+  <div class="port">
+    @if (editMode()) {
+    <div
+      class="port-name"
+      [style.background-color]="
+        port.type.connectionType?.color ||
+        port.type.connectionType?.colorInherited
+      "
+    >
+      {{ port.name }}
+    </div>
+    }
+    <handle
+      type="source"
+      [position]="position()"
+      [id]="port.id"
+      [template]="handleTemplate"
+    />
+    @let color = port.type.connectionType?.color ||
+    port.type.connectionType?.colorInherited; @let name = port.name;
+    <ng-template #handleTemplate let-ctx>
+      <svg:rect
+        [attr.x]="ctx.point().x - 6"
+        [attr.y]="ctx.point().y - 6"
+        [attr.width]="12"
+        [attr.height]="12"
+        stroke-width="1"
+        [attr.stroke]="color || 'gray'"
+        [attr.fill]="color || 'gray'"
+        (mousedown)="onHandleMouseDown()"
+      />
+    </ng-template>
+  </div>
+  }
+</div>
+}
