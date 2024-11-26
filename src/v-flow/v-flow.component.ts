@@ -25,8 +25,8 @@ import { FeatureModel } from "../model/feature.model";
 import { mockDarmstadtData } from "../mock-data";
 @Component({
   selector: "app-vflow",
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [VflowModule, BackgroundSvgComponent, GrafenHauserComponent],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",

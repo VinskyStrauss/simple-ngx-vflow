@@ -3,7 +3,6 @@ import { ElementData } from "../model/element-data.model";
 import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
 @Component({
   selector: "grafen-background-svg",
-  standalone: true,
   template: `
     <svg
       viewBox="0 0 1220 1069"
@@ -31,6 +30,7 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
       }
     `,
   ],
+  standalone: true,
   imports: [CustomSvgComponent],
 })
 export class GrafenHauserComponent {

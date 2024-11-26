@@ -16,10 +16,10 @@ import { svg } from "d3";
 
 @Component({
   selector: "svg:g[custom-element]",
-  standalone: true,
   imports: [],
-  template: ``,
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  template: ``,
   styles: `
       :host { 
           display: contents;

@@ -7,7 +7,6 @@ import {
   signal,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { MatTooltipModule } from "@angular/material/tooltip";
 import { VflowModule } from "ngx-vflow";
 import { fromEvent, take } from "rxjs";
 import { Port } from "../../../model/port.model";
@@ -18,7 +17,7 @@ import { Port } from "../../../model/port.model";
   styleUrls: ["./scope-node-port.component.scss"],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [VflowModule, MatTooltipModule],
+  imports: [VflowModule],
 })
 export class ScopeNodeVPortComponent {
   nodePorts = input<Port[]>();
