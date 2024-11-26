@@ -71,22 +71,19 @@ export class CustomSvgComponent {
     const svgPaths = this.darmstadtConverter.convert(this.myGeoJson());
     console.log("SVGPaths", svgPaths);
 
-    const scaleFactor = 0.2;
+    const scaleFactor = 0.3;
     const viewportCenterX = 1220 / 2;
     const viewportCenterY = 1069 / 2;
 
     // Translate to reposition after scaling
     const transformedSvg = `
-      <g transform="translate(${(1 - scaleFactor) * viewportCenterX}, ${
-      (1 - scaleFactor) * viewportCenterY
-    }) scale(${scaleFactor}, ${scaleFactor})">
+      <g transform=" scale(${scaleFactor}, ${scaleFactor})">
         ${svgPaths.join("")}
       </g>`;
 
     // Sanitizing the SVG paths
-    const sanitizedPath = this.sanitizer.bypassSecurityTrustHtml(
-      svgPaths.join("")
-    );
+    const sanitizedPath =
+      this.sanitizer.bypassSecurityTrustHtml(transformedSvg);
     return sanitizedPath;
   });
 }

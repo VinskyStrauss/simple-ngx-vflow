@@ -57,16 +57,6 @@ export class SimpleVflowComponent {
       console.log("Created node:", node); // Log the created node
       return node;
     }),
-    /*  {
-      id: "1",
-      point: { x: 100, y: 100 },
-      type: "default",
-    },
-    {
-      id: "2",
-      point: { x: 200, y: 200 },
-      type: "default",
-    }, */
   ];
 
   public edges: Edge[] = [];
@@ -102,12 +92,13 @@ export class SimpleVflowComponent {
     this.edges = [
       ...this.edges,
       {
-        id: `${source} -> ${target}`,
+        id: `${source} ${sourceHandle} -> ${target} ${targetHandle}`,
         source,
         sourceHandle,
         target,
         targetHandle,
         curve: "straight",
+        type: "template",
         markers: {
           end: {
             type: "arrow-closed",
