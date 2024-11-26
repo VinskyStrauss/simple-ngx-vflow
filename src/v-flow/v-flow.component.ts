@@ -95,14 +95,18 @@ export class SimpleVflowComponent {
     this.edges = this.edges.filter((e) => e.id !== edge.id);
   }
 
-  public connect({ source, target }: Connection) {
-    console.log("Connect", source, target);
+  public connect({ source, sourceHandle, targetHandle, target }: Connection) {
+    console.log("Connect");
+    console.log("Source", source);
+    console.log("Target", target);
     this.edges = [
       ...this.edges,
       {
         id: `${source} -> ${target}`,
         source,
+        sourceHandle,
         target,
+        targetHandle,
         curve: "straight",
         markers: {
           end: {

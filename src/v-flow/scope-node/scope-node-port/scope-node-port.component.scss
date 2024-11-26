@@ -1,0 +1,17 @@
+.ports {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+}
+
+.port {
+  display: flex;
+  flex-direction: column;
+  margin: 13px;
+}
+
+.port-name {
+  border-radius: 3px;
+  font-size: 10px;
+}

@@ -1,6 +1,32 @@
 <div class="container">
-  <!-- <svg>
-        <svg:g custom-element [element]="element()"></svg:g>
-      </svg> -->
-  <span>{{ data }}</span>
+  <div class="node">
+    <div class="node-info">
+      @if(data()?.feature?.elements) {
+
+      <svg:g custom-element [element]="data()?.feature?.elements!"></svg:g>
+
+      }
+      <span>{{ data()?.feature?.name }}</span>
+    </div>
+
+    <div class="portsLeft">
+      <eta-scope-node-ports
+        [nodePorts]="leftPorts()"
+        [position]="'left'"
+      ></eta-scope-node-ports>
+    </div>
+
+    <div class="portsRight">
+      <eta-scope-node-ports
+        [nodePorts]="rightPorts()"
+        [position]="'right'"
+      ></eta-scope-node-ports>
+    </div>
+    <div class="portsTop">
+      <eta-scope-node-ports
+        [nodePorts]="topPorts()"
+        [position]="'top'"
+      ></eta-scope-node-ports>
+    </div>
+  </div>
 </div>

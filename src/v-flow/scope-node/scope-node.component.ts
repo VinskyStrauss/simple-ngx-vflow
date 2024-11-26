@@ -11,6 +11,7 @@ import { CustomSvgComponent } from "../../background-svg/custom-svg/custom-svg.c
 import { ElementData } from "../../model/element-data.model";
 import { FeatureModel } from "../../model/feature.model";
 import { Port } from "../../model/port.model";
+import { ScopeNodeVPortComponent } from "./scope-node-port/scope-node-port.component";
 
 interface ScopeNodeData {
   feature: FeatureModel;
@@ -19,20 +20,9 @@ interface ScopeNodeData {
 @Component({
   selector: "custom-node ",
   standalone: true,
-  imports: [CustomSvgComponent],
+  imports: [CustomSvgComponent, ScopeNodeVPortComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="container">
-      <div class="node">
-        @if(data()?.feature?.elements) {
-
-        <svg:g custom-element [element]="data()?.feature?.elements!"></svg:g>
-
-        }
-        <span>{{ data()?.feature?.name }}</span>
-      </div>
-    </div>
-  `,
+  templateUrl: "./scope-node.component.html",
   styleUrls: ["./scope-node.component.scss"],
 })
 export class ScopeNodeComponent extends CustomNodeComponent<ScopeNodeData> {
