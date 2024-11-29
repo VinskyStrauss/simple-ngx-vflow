@@ -2,9 +2,11 @@
   <div class="node">
     <div class="node-info">
       @if(data()?.feature?.elements) {
-      <svg>
-        <svg:g custom-element [element]="data()?.feature?.elements!"></svg:g>
-      </svg>
+      <div class="svg">
+        <svg>
+          <svg:g custom-element [element]="data()?.feature?.elements!"></svg:g>
+        </svg>
+      </div>
       }
       <span>{{ data()?.feature?.name }}</span>
     </div>
