@@ -69,7 +69,7 @@ export class SimpleVflowComponent {
     return {
       id: crypto.randomUUID(),
       data: { feature },
-      point: { x: xPixel, y: yPixel },
+      point: { x: xPixel - 100, y: yPixel - 100 },
       type: ScopeNodeComponent,
     };
   }
@@ -185,6 +185,8 @@ export class SimpleVflowComponent {
 
         const centroidX = xSum / (6 * area);
         const centroidY = ySum / (6 * area);
+
+        console.log("Calculated centroid:", { centroidX, centroidY });
 
         return [centroidX, centroidY];
       }
