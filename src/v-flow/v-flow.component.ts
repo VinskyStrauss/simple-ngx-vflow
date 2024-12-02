@@ -123,7 +123,7 @@ export class SimpleVflowComponent {
   private calculateCoordinate(feature: FeatureModel) {
     const height = 1069;
     const width = 1220;
-    // Map extent
+    // Map extent for case Darmstadt
     const mapExtent = {
       left: 8.634022529410913, // Longitude for top-left corner
       bottom: 49.8835094952137, // Latitude for bottom-right corner
