@@ -4,19 +4,26 @@ import { SimpleVflowComponent } from "./v-flow/v-flow.component";
 import { mockDarmstadtData } from "./mock-data";
 
 @Component({
-    selector: "app-root",
-    imports: [SimpleVflowComponent],
-    template: `
-    <h1>Ngx-vflow with GeoJSON</h1>
-    <div class="vflow-container">
-      <app-vflow></app-vflow>
+  selector: "app-root",
+  imports: [SimpleVflowComponent],
+  template: `
+    <div class="page">
+      <h1>Ngx-vflow with GeoJSON</h1>
+      <div>
+        <app-vflow></app-vflow>
+      </div>
     </div>
   `,
-    styles: `
+  styles: `
   .vflow-container {
     width: 100%;
   }
-`
+  .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`,
 })
 export class App implements OnInit {
   ngOnInit(): void {

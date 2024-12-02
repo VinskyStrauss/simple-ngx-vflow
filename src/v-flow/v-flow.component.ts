@@ -66,7 +66,7 @@ export class SimpleVflowComponent {
     return {
       id: crypto.randomUUID(),
       data: { feature },
-      point: { x: 100, y: 100 },
+      point: { x: 0, y: 0 },
       type: ScopeNodeComponent,
     };
   }
