@@ -3,7 +3,10 @@
     {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
   </button>
   <!-- <alexander-svg [elements]="myElements"></alexander-svg> -->
-  <grafen-background-svg [elements]="darmstadtElements"></grafen-background-svg>
+  <grafen-background-svg
+    #svgBackground
+    [elements]="darmstadtElements"
+  ></grafen-background-svg>
   <!-- <app-background-svg [elements]="myElements"></app-background-svg> -->
   <vflow
     view="auto"
