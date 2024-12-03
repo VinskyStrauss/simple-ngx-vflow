@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
   signal,
   ViewChild,
@@ -41,6 +42,17 @@ export class SimpleVflowComponent {
 
   readonly mockData = mockDarmstadtData;
 
+  //Dragggable
+  isDraggable = signal<boolean>(false);
+
+  toggleDraggable() {
+    this.isDraggable.set(!this.isDraggable());
+    this.nodes.forEach((node) => {
+      node.draggable = this.isDraggable();
+    });
+    console.log("Draggable", this.isDraggable());
+  }
+
   backGround: Background = {
     type: "solid",
     color: "transparent",
@@ -67,9 +79,10 @@ export class SimpleVflowComponent {
     //Calculate the coordinate of the feature
     const { xPixel, yPixel } = this.calculateCoordinate(feature);
     return {
-      id: crypto.randomUUID(),
+      id: feature.id,
       data: { feature },
       point: { x: xPixel - 100, y: yPixel - 100 },
+      draggable: this.isDraggable(),
       type: ScopeNodeComponent,
     };
   }

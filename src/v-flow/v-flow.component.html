@@ -1,4 +1,7 @@
 <div class="vflow-container">
+  <button (click)="toggleDraggable()">
+    {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
+  </button>
   <!-- <alexander-svg [elements]="myElements"></alexander-svg> -->
   <grafen-background-svg [elements]="darmstadtElements"></grafen-background-svg>
   <!-- <app-background-svg [elements]="myElements"></app-background-svg> -->
