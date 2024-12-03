@@ -36,8 +36,6 @@ import { mockDarmstadtData } from "../mock-data";
   styleUrl: "./v-flow.component.scss",
 })
 export class SimpleVflowComponent {
-  //Vflow
-  vflow = ViewChild(VflowComponent);
   //vFlow nodes
   vNodes = signal<Node[]>([]);
   readonly darmstadtElements = darmstadtElements;
@@ -209,7 +207,11 @@ export class SimpleVflowComponent {
 
     return [0, 0]; // Default return in case of invalid input
   }
+  @ViewChild("vflow") vflow!: VflowComponent; // Reference to the vflow component
   onMouseWheel(event: WheelEvent): void {
     console.log("Mouse wheel event in vflow Container", event);
+    this.vflow.viewportChange$.forEach((viewport) => {
+      console.log("Viewport", viewport);
+    });
   }
 }
