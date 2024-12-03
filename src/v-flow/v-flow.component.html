@@ -1,4 +1,4 @@
-<div class="vflow-container">
+<div class="vflow-container" (wheel)="onMouseWheel($event)">
   <button (click)="toggleDraggable()">
     {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
   </button>

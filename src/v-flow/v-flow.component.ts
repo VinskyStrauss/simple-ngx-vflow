@@ -209,4 +209,7 @@ export class SimpleVflowComponent {
 
     return [0, 0]; // Default return in case of invalid input
   }
+  onMouseWheel(event: WheelEvent): void {
+    console.log("Mouse wheel event", event);
+  }
 }
