@@ -27,6 +27,7 @@ import { darmstadtElements } from "../darmstadt-data";
 import { ScopeNodeComponent } from "./scope-node/scope-node.component";
 import { FeatureModel } from "../model/feature.model";
 import { mockDarmstadtData } from "../mock-data";
+import * as turf from "@turf/turf";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -156,12 +157,7 @@ export class SimpleVflowComponent {
     return { xPixel, yPixel };
   }
 
-  //Calculate the centroid of the polygon
   private calculatePolygonCentroid(feature: FeatureModel): [number, number] {
-    let xSum = 0;
-    let ySum = 0;
-    let area = 0;
-
     if (!feature.elements.myGeoJson) {
       return [0, 0]; // Return default if no GeoJSON
     }
@@ -171,41 +167,17 @@ export class SimpleVflowComponent {
       const geometry = feature.elements.myGeoJson.geometry;
 
       // Ensure the geometry type is "Polygon"
-      if (geometry.type === "Polygon") {
-        const coordinates = geometry.coordinates[0]; // First set of coordinates for the polygon
-        const vertexCount = coordinates.length;
+      if (geometry.type === "Polygon" || geometry.type === "MultiPolygon") {
+        // Use turf.centroid to calculate the centroid
+        const centroid = turf.centroid(feature.elements.myGeoJson);
 
-        // Ensure the polygon is closed
-        if (
-          coordinates[0][0] !== coordinates[vertexCount - 1][0] ||
-          coordinates[0][1] !== coordinates[vertexCount - 1][1]
-        ) {
-          coordinates.push(coordinates[0]); // Close the polygon if necessary
-        }
+        // Log the calculated centroid
+        console.log("Calculated centroid:", centroid.geometry.coordinates);
 
-        for (let i = 0; i < coordinates.length - 1; i++) {
-          const [x1, y1] = coordinates[i];
-          const [x2, y2] = coordinates[i + 1];
-
-          const partialArea = x1 * y2 - x2 * y1;
-
-          xSum += (x1 + x2) * partialArea;
-          ySum += (y1 + y2) * partialArea;
-          area += partialArea;
-        }
-
-        area *= 0.5;
-
-        const centroidX = xSum / (6 * area);
-        const centroidY = ySum / (6 * area);
-
-        console.log("Calculated centroid:", { centroidX, centroidY });
-
-        return [centroidX, centroidY];
+        return centroid.geometry.coordinates as [number, number];
       }
     }
-
-    return [0, 0]; // Default return in case of invalid input
+    return [0, 0]; // Return default if no valid polygon found
   }
   @ViewChild("vflow") vflow!: VflowComponent; // Reference to the vflow component
   onMouseWheel(event: WheelEvent): void {

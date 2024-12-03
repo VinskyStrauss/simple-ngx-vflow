@@ -15,6 +15,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@turf/projection": "^7.1.0",
+    "@turf/turf": "^7.1.0",
     "@types/d3": "^7.4.3",
     "@types/proj4": "^2.5.5",
     "d3": "^7.9.0",
