@@ -4,6 +4,7 @@ import {
   ElementRef,
   HostListener,
   Renderer2,
+  input,
 } from "@angular/core";
 import { ElementData } from "../model/element-data.model";
 import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
@@ -26,36 +27,19 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
       } -->
     </svg>
   `,
-  styles: [
-    `
-      :host {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        overflow: hidden;
-        pointer-events: auto;
-      }
-      svg {
-        display: block;
-        transition: transform 0.1s ease-out; /* Smooth zooming */
-      }
-    `,
-  ],
+  styles: [``],
   standalone: true,
   imports: [CustomSvgComponent],
 })
 export class GrafenHauserComponent {
-  @Input() elements: ElementData[] = [];
+  elements = input<ElementData[]>();
 
   private scale = 1;
-  private readonly zoomFactor = 0.1;
-  private readonly minScale = 0.1;
+  private readonly zoomFactor = 0.2;
+  private readonly minScale = 0.2;
   private readonly maxScale = 5;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(public el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener("wheel", ["$event"])
   onWheel(event: WheelEvent): void {

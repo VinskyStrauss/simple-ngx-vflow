@@ -1,13 +1,12 @@
-<div class="vflow-container" (wheel)="onMouseWheel($event)">
-  <button (click)="toggleDraggable()">
+<div #vflowContainer class="vflow-container">
+  <!--   <button (click)="toggleDraggable()">
     {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
-  </button>
-  <!-- <alexander-svg [elements]="myElements"></alexander-svg> -->
-  <!-- <grafen-background-svg
+  </button> -->
+  <grafen-background-svg
+    class="background-svg"
     #svgBackground
     [elements]="darmstadtElements"
-  ></grafen-background-svg> -->
-  <!-- <app-background-svg [elements]="myElements"></app-background-svg> -->
+  ></grafen-background-svg>
   <vflow
     #vflow
     view="auto"

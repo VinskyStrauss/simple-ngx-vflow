@@ -11,6 +11,17 @@
   border: 2px solid;
   border-radius: 3px;
 }
+.background-svg {
+  position: absolute; /* Ensure it's positioned behind */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  transform-origin: center; /* Sets the zoom center */
+  transition: transform 0.2s ease-in-out; /* Smooth zoom transitions */
+}
 
 .without-tab-index {
   outline: none;

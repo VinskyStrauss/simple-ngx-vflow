@@ -4,9 +4,11 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   input,
   OnDestroy,
   signal,
+  viewChild,
   ViewChild,
 } from "@angular/core";
 import { DndDropEvent, DndModule } from "ngx-drag-drop";
@@ -36,7 +38,7 @@ import * as turf from "@turf/turf";
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
-export class SimpleVflowComponent {
+export class SimpleVflowComponent implements AfterViewInit, OnDestroy {
   //vFlow nodes
   vNodes = signal<Node[]>([]);
   readonly darmstadtElements = darmstadtElements;
@@ -179,11 +181,32 @@ export class SimpleVflowComponent {
     }
     return [0, 0]; // Return default if no valid polygon found
   }
-  @ViewChild("vflow") vflow!: VflowComponent; // Reference to the vflow component
+  @ViewChild("vflowContainer", { static: false }) vflowContainer!: ElementRef; // Reference to the vflow container element
+  @ViewChild("svgBackground", { static: false })
+  svgBackground!: GrafenHauserComponent;
+  ngAfterViewInit() {
+    // Attach the wheel event listener to the native element
+    if (this.vflowContainer) {
+      this.vflowContainer.nativeElement.addEventListener(
+        "wheel",
+        this.onMouseWheel.bind(this)
+      );
+    }
+  }
+
   onMouseWheel(event: WheelEvent): void {
-    console.log("Mouse wheel event in vflow Container", event);
-    this.vflow.viewportChange$.forEach((viewport) => {
-      console.log("Viewport", viewport);
-    });
+    console.log("Mouse wheel event in vflow Container:", event);
+    this.svgBackground.onWheel(event);
+    // Add your logic here
+  }
+
+  ngOnDestroy() {
+    // Remove the wheel event listener to prevent memory leaks
+    if (this.vflowContainer) {
+      this.vflowContainer.nativeElement.removeEventListener(
+        "wheel",
+        this.onMouseWheel.bind(this)
+      );
+    }
   }
 }
