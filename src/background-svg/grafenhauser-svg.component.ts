@@ -27,7 +27,24 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
       } -->
     </svg>
   `,
-  styles: [``],
+  styles: [
+    `
+      :host {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: auto;
+      }
+      svg {
+        display: block;
+        transition: transform 0.1s ease-out; /* Smooth zooming */
+      }
+    `,
+  ],
   standalone: true,
   imports: [CustomSvgComponent],
 })
@@ -41,33 +58,18 @@ export class GrafenHauserComponent {
 
   constructor(public el: ElementRef, private renderer: Renderer2) {}
 
-  @HostListener("wheel", ["$event"])
-  onWheel(event: WheelEvent): void {
-    event.preventDefault();
-
+  zoom(viewPort: any): void {
+    console.log("Zooming", viewPort);
     const svgElement = this.el.nativeElement.querySelector("svg");
 
     // Get mouse position relative to the SVG
-    const rect = svgElement.getBoundingClientRect();
-    const mouseX = (event.clientX - rect.left) / rect.width;
-    const mouseY = (event.clientY - rect.top) / rect.height;
-
-    // Adjust zoom scale
-    if (event.deltaY < 0) {
-      this.scale += this.zoomFactor; // Zoom in
-    } else {
-      this.scale -= this.zoomFactor; // Zoom out
-    }
-
-    // Clamp scale to min/max values
-    this.scale = Math.max(this.minScale, Math.min(this.maxScale, this.scale));
-
-    // Apply scaling and set transform-origin dynamically
-    this.renderer.setStyle(svgElement, "transform", `scale(${this.scale})`);
+    const { x, y, zoom } = viewPort;
+    // Set transform to scale the SVG based on the ngx-vflow zoom
     this.renderer.setStyle(
       svgElement,
-      "transform-origin",
-      `${mouseX * 100}% ${mouseY * 100}%`
+      "transform",
+      `translate(${x}px, ${y}px) scale(${zoom})`
     );
+    this.renderer.setStyle(svgElement, "transform-origin", `0 0`); // Anchor at the top-left corner
   }
 }

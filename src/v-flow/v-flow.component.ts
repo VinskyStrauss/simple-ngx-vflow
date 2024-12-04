@@ -38,7 +38,7 @@ import * as turf from "@turf/turf";
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
-export class SimpleVflowComponent implements AfterViewInit, OnDestroy {
+export class SimpleVflowComponent implements AfterViewInit {
   //vFlow nodes
   vNodes = signal<Node[]>([]);
   readonly darmstadtElements = darmstadtElements;
@@ -182,31 +182,13 @@ export class SimpleVflowComponent implements AfterViewInit, OnDestroy {
     return [0, 0]; // Return default if no valid polygon found
   }
   @ViewChild("vflowContainer", { static: false }) vflowContainer!: ElementRef; // Reference to the vflow container element
-  @ViewChild("svgBackground", { static: false })
-  svgBackground!: GrafenHauserComponent;
+  @ViewChild("vflow") vflow!: VflowComponent;
+  @ViewChild("svgBackground") svgBackground!: GrafenHauserComponent;
   ngAfterViewInit() {
+    console.log("Vflow container:", this.vflowContainer);
     // Attach the wheel event listener to the native element
-    if (this.vflowContainer) {
-      this.vflowContainer.nativeElement.addEventListener(
-        "wheel",
-        this.onMouseWheel.bind(this)
-      );
-    }
-  }
-
-  onMouseWheel(event: WheelEvent): void {
-    console.log("Mouse wheel event in vflow Container:", event);
-    this.svgBackground.onWheel(event);
-    // Add your logic here
-  }
-
-  ngOnDestroy() {
-    // Remove the wheel event listener to prevent memory leaks
-    if (this.vflowContainer) {
-      this.vflowContainer.nativeElement.removeEventListener(
-        "wheel",
-        this.onMouseWheel.bind(this)
-      );
-    }
+    this.vflow.viewportChange$.forEach((viewport) => {
+      this.svgBackground.zoom(viewport);
+    });
   }
 }
