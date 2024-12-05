@@ -41,7 +41,6 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
       }
       svg {
         display: block;
-        transition: transform 0.1s ease-out; /* Smooth zooming */
       }
     `,
   ],
