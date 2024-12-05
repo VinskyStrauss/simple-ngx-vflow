@@ -43,7 +43,7 @@ export class CustomSvgComponent {
       right: 8.638534952430376, // longitude for bottom-right corner
       top: 49.88613737107883, // latitude for top-left corner
     }, */
-    viewportSize: { width: 1220, height: 1069 },
+    viewportSize: { width: 100, height: 100 },
     r: 10,
   });
 
@@ -73,7 +73,7 @@ export class CustomSvgComponent {
     const svgPaths = this.darmstadtConverter.convert(this.myGeoJson());
     console.log("SVGPaths", svgPaths);
 
-    const scaleFactor = 0.1;
+    const scaleFactor = 1;
     const viewportCenterX = 1220 / 2;
     const viewportCenterY = 1069 / 2;
 

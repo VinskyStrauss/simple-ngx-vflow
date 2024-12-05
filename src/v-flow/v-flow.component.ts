@@ -92,6 +92,8 @@ export class SimpleVflowComponent implements AfterViewInit {
       data: { feature },
       point: { x: xPixel - 100, y: yPixel - 100 },
       draggable: this.isDraggable(),
+      height: 500,
+      width: 500,
       type: ScopeNodeComponent,
     };
   }
