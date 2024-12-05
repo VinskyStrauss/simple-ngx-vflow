@@ -37,12 +37,12 @@ export class CustomSvgComponent {
 
   //Converter for the darmstadt grafenhauser map
   darmstadtConverter = new GeoJSON2SVG({
-    mapExtent: {
+    /* mapExtent: {
       left: 8.634022529410913, // longitude for top-left corner
       bottom: 49.8835094952137, // latitude for bottom-right corner
       right: 8.638534952430376, // longitude for bottom-right corner
       top: 49.88613737107883, // latitude for top-left corner
-    },
+    }, */
     viewportSize: { width: 1220, height: 1069 },
     r: 10,
   });
@@ -73,7 +73,7 @@ export class CustomSvgComponent {
     const svgPaths = this.darmstadtConverter.convert(this.myGeoJson());
     console.log("SVGPaths", svgPaths);
 
-    const scaleFactor = 0.3;
+    const scaleFactor = 0.1;
     const viewportCenterX = 1220 / 2;
     const viewportCenterY = 1069 / 2;
 
