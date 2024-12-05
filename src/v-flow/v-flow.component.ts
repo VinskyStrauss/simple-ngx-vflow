@@ -87,6 +87,7 @@ export class SimpleVflowComponent implements AfterViewInit {
   public createNode(feature: FeatureModel): Node {
     //Calculate the coordinate of the feature
     const { xPixel, yPixel } = this.calculateCoordinate(feature);
+    const { width, height } = this.calculateNodeSize(feature);
     return {
       id: feature.id,
       data: { feature },
@@ -141,6 +142,56 @@ export class SimpleVflowComponent implements AfterViewInit {
   //Console.log the position change
   public onPositionChange(changes: NodeChange[]) {
     console.log("Position change", changes);
+  }
+  //Calculate the width and height of the node
+  private calculateNodeSize(feature: FeatureModel) {
+    const height = 1069;
+    const width = 1220;
+    // Map extent for case Darmstadt
+    const mapExtent = {
+      left: 8.634022529410913, // Longitude for top-left corner
+      bottom: 49.8835094952137, // Latitude for bottom-right corner
+      right: 8.638534952430376, // Longitude for bottom-right corner
+      top: 49.88613737107883, // Latitude for top-left corner
+    };
+    if (!feature.elements.myGeoJson) {
+      return { width: 500, height: 500 };
+    }
+
+    const myGeoJson = feature.elements.myGeoJson;
+
+    // Check if the GeoJSON type is "Feature"
+    if (myGeoJson.type === "Feature") {
+      const geometry = myGeoJson.geometry;
+
+      // Ensure the geometry type is "Polygon"
+      if (geometry.type === "Polygon") {
+        const coordinates = geometry.coordinates[0]; // Access the first ring of the polygon
+
+        // Extract all latitudes and longitudes
+        const longitudes = coordinates.map((coord) => coord[0]); // X values (longitudes)
+        const latitudes = coordinates.map((coord) => coord[1]); // Y values (latitudes)
+
+        // Polygon bounding box
+        const minPolygonLng = Math.min(...longitudes);
+        const maxPolygonLng = Math.max(...longitudes);
+        const minPolygonLat = Math.min(...latitudes);
+        const maxPolygonLat = Math.max(...latitudes);
+
+        // Calculate scaling factors
+        const scaleX = width / (mapExtent.right - mapExtent.left); // Pixels per degree longitude
+        const scaleY = height / (mapExtent.top - mapExtent.bottom); // Pixels per degree latitude
+
+        // Calculate pixel dimensions of the polygon
+        const pixelWidth = (maxPolygonLng - minPolygonLng) * scaleX;
+        const pixelHeight = (maxPolygonLat - minPolygonLat) * scaleY;
+        console.log("Feature:", feature.name);
+        console.log("Calculated dimensions:", { pixelWidth, pixelHeight });
+        return { width: pixelWidth, height: pixelHeight };
+      }
+    }
+
+    return { width: 500, height: 500 };
   }
 
   //Calculate the coordinate of the feature in ngx-vflow
