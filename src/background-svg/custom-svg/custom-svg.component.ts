@@ -4,6 +4,7 @@ import {
   computed,
   HostBinding,
   inject,
+  input,
   Input,
 } from "@angular/core";
 import { ElementData } from "../../model/element-data.model";
@@ -32,7 +33,9 @@ import { svg } from "d3";
   },
 })
 export class CustomSvgComponent {
-  @Input() element!: ElementData; // Assume ElementData includes myGeoJson property
+  element = input<ElementData>(); // Assume ElementData includes myGeoJson property
+  width = input<number>();
+  height = input<number>();
   private sanitizer = inject(DomSanitizer);
 
   //Converter for the darmstadt grafenhauser map
@@ -43,19 +46,21 @@ export class CustomSvgComponent {
       right: 8.638534952430376, // longitude for bottom-right corner
       top: 49.88613737107883, // latitude for top-left corner
     }, */
-    viewportSize: { width: 100, height: 100 },
+    viewportSize: { width: this.width() ?? 200, height: this.height() ?? 200 },
     r: 10,
   });
 
   // Reactive accessor for GeoJSON data
-  myGeoJson = computed(() => this.element.myGeoJson);
+  myGeoJson = computed(() => this.element()?.myGeoJson);
 
   // Generate SVG path data from GeoJSON and render it as SVG
   mySvg = computed(() => {
     console.log(this.myGeoJson());
     //Transforming the GeoJson coordinates to pixel coordinates
     const myGeoJSON = this.myGeoJson() as any;
-
+    if (!myGeoJSON) {
+      return;
+    }
     //Use reproject
     // covert wgs84 data to Web Mercator projection
     const geojson3857 = reproject.reproject(
@@ -70,12 +75,10 @@ export class CustomSvgComponent {
     // Optionally convert GeoJSON to WGS84 format
     const convertedToMercator = toMercator(myGeoJSON);
     console.log("Converted to Mercator", convertedToMercator);
-    const svgPaths = this.darmstadtConverter.convert(this.myGeoJson());
+    const svgPaths = this.darmstadtConverter.convert(myGeoJSON);
     console.log("SVGPaths", svgPaths);
 
     const scaleFactor = 1;
-    const viewportCenterX = 1220 / 2;
-    const viewportCenterY = 1069 / 2;
 
     // Translate to reposition after scaling
     const transformedSvg = `

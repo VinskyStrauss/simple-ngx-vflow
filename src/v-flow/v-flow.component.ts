@@ -40,6 +40,7 @@ import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
     BackgroundSvgComponent,
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
+    ScopeNodeComponent,
   ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
@@ -91,11 +92,11 @@ export class SimpleVflowComponent implements AfterViewInit {
     return {
       id: feature.id,
       data: { feature },
-      point: { x: xPixel - 100, y: yPixel - 100 },
+      point: { x: xPixel - 50, y: yPixel - 50 },
       draggable: this.isDraggable(),
-      height: 500,
-      width: 500,
-      type: ScopeNodeComponent,
+      height: height,
+      width: width,
+      type: "html-template",
     };
   }
 

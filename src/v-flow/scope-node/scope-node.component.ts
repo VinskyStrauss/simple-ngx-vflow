@@ -4,6 +4,7 @@ import {
   computed,
   Input,
   input,
+  OnInit,
   Signal,
 } from "@angular/core";
 import { CustomNodeComponent } from "ngx-vflow";
@@ -25,13 +26,24 @@ interface ScopeNodeData {
   templateUrl: "./scope-node.component.html",
   styleUrls: ["./scope-node.component.scss"],
 })
-export class ScopeNodeComponent extends CustomNodeComponent<ScopeNodeData> {
-  //Retrieve the data, so we can use it in html
-  name = computed(() => this.data()?.feature?.name);
+export class ScopeNodeComponent
+  extends CustomNodeComponent<ScopeNodeData>
+  implements OnInit
+{
+  nodeContext = input<any>();
 
+  override ngOnInit(): void {
+    console.log("ScopeNodeComponent", this.nodeContext());
+  }
+  //Retrieve the data, so we can use it in html
+  name = computed(() => this.nodeContext().node.data.feature.name);
+
+  //Node width and height
+  width = computed(() => this.nodeContext().node.width);
+  height = computed(() => this.nodeContext().node.height);
   //Get tge port
   ports: Signal<Port[] | undefined> = computed(
-    () => this.data()?.feature?.ports
+    () => this.nodeContext().node.data.feature.ports
   );
 
   leftPorts: Signal<Port[] | undefined> = computed(() =>
