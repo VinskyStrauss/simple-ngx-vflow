@@ -30,11 +30,17 @@ import { ScopeNodeComponent } from "./scope-node/scope-node.component";
 import { FeatureModel } from "../model/feature.model";
 import { mockDarmstadtData } from "../mock-data";
 import * as turf from "@turf/turf";
+import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
 @Component({
   selector: "app-vflow",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [VflowModule, BackgroundSvgComponent, GrafenHauserComponent],
+  imports: [
+    VflowModule,
+    BackgroundSvgComponent,
+    GrafenHauserComponent,
+    ScopeEdgeFlowComponent,
+  ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })

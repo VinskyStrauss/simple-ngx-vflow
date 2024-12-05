@@ -23,6 +23,8 @@ import { svg } from "d3";
   styles: `
       :host { 
           display: contents;
+          width: 200px,
+          height: 200px,
       }
     `,
   host: {
