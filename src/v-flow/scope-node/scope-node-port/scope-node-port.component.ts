@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { VflowModule } from "ngx-vflow";
 import { fromEvent, take } from "rxjs";
 import { Port } from "../../../model/port.model";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: "eta-scope-node-ports",
@@ -17,7 +18,7 @@ import { Port } from "../../../model/port.model";
   styleUrls: ["./scope-node-port.component.scss"],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [VflowModule],
+  imports: [VflowModule, MatTooltipModule],
 })
 export class ScopeNodeVPortComponent {
   nodePorts = input<Port[]>();

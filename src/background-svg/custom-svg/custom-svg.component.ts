@@ -25,8 +25,8 @@ import { svg } from "d3";
   styles: `
       :host { 
           display: contents;
-          width: 200px,
-          height: 200px,
+          width: width(),
+          height: height(),
       }
     `,
   host: {
@@ -41,12 +41,6 @@ export class CustomSvgComponent {
 
   //Converter for the darmstadt grafenhauser map
   darmstadtConverter = new GeoJSON2SVG({
-    /* mapExtent: {
-      left: 8.634022529410913, // longitude for top-left corner
-      bottom: 49.8835094952137, // latitude for bottom-right corner
-      right: 8.638534952430376, // longitude for bottom-right corner
-      top: 49.88613737107883, // latitude for top-left corner
-    }, */
     viewportSize: { width: this.width() ?? 200, height: this.height() ?? 200 },
     r: 10,
   });
@@ -64,7 +58,7 @@ export class CustomSvgComponent {
     }
 
     //Convert with turf
-    // Optionally convert GeoJSON to WGS84 format
+    // Optionally convert GeoJSON from WGS84 format to EPSG:900913 (Mercator)
     const convertedToMercator = toMercator(myGeoJSON);
     console.log("Converted to Mercator", convertedToMercator);
     const svgPaths = this.darmstadtConverter.convert(convertedToMercator);

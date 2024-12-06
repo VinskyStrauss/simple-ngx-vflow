@@ -40,7 +40,6 @@ import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.comp
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
     ScopeNodeComponent,
-    CustomSvgComponent,
   ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",

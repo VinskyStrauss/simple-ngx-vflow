@@ -40,16 +40,9 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
     `,
   ],
   standalone: true,
-  imports: [CustomSvgComponent],
+  imports: [],
 })
 export class GrafenHauserComponent {
-  elements = input<ElementData[]>();
-
-  private scale = 1;
-  private readonly zoomFactor = 0.2;
-  private readonly minScale = 0.2;
-  private readonly maxScale = 5;
-
   constructor(public el: ElementRef, private renderer: Renderer2) {}
 
   zoom(viewPort: any): void {
