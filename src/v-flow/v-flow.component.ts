@@ -31,6 +31,7 @@ import { FeatureModel } from "../model/feature.model";
 import { mockDarmstadtData } from "../mock-data";
 import * as turf from "@turf/turf";
 import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
+import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.component";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -41,6 +42,7 @@ import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
     ScopeNodeComponent,
+    CustomSvgComponent,
   ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
@@ -92,7 +94,7 @@ export class SimpleVflowComponent implements AfterViewInit {
     return {
       id: feature.id,
       data: { feature },
-      point: { x: xPixel - 50, y: yPixel - 50 },
+      point: { x: xPixel - width / 2.5, y: yPixel - height / 2.5 },
       draggable: this.isDraggable(),
       height: height,
       width: width,

@@ -1,5 +1,11 @@
 <div class="container">
-  <div class="node">
+  <div
+    class="node"
+    [style]="{
+      '--node-width': width() + 'px',
+      '--node-height': height() + 'px'
+    }"
+  >
     <div class="node-info">
       @if(nodeContext().node.data.feature.elements) {
       <div class="svg-container">

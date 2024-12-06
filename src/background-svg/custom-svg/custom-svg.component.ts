@@ -6,6 +6,7 @@ import {
   inject,
   input,
   Input,
+  OnInit,
 } from "@angular/core";
 import { ElementData } from "../../model/element-data.model";
 import { GeoJSON2SVG } from "geojson2svg";

@@ -18,8 +18,12 @@
       display: flex;
     }
   }
-  width: 200px;
-  height: 200px;
+  // Use CSS variables for width and height
+  width: var(--node-width, 200px); // Default to 200px if the variable isn't set
+  height: var(
+    --node-height,
+    200px
+  ); // Default to 200px if the variable isn't set
 
   // Indicate to the user node will be deleted
   &:has(.delete:hover) {
