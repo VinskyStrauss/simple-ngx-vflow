@@ -62,21 +62,12 @@ export class CustomSvgComponent {
     if (!myGeoJSON) {
       return;
     }
-    //Use reproject
-    // covert wgs84 data to Web Mercator projection
-    const geojson3857 = reproject.reproject(
-      myGeoJSON,
-      "EPSG:4326",
-      "EPSG:3857",
-      proj4.defs
-    );
-    console.log("Reprojected", geojson3857);
 
     //Convert with turf
     // Optionally convert GeoJSON to WGS84 format
     const convertedToMercator = toMercator(myGeoJSON);
     console.log("Converted to Mercator", convertedToMercator);
-    const svgPaths = this.darmstadtConverter.convert(myGeoJSON);
+    const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
     console.log("SVGPaths", svgPaths);
 
     const scaleFactor = 1;
