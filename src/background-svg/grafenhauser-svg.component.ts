@@ -58,7 +58,6 @@ export class GrafenHauserComponent {
   constructor(public el: ElementRef, private renderer: Renderer2) {}
 
   zoom(viewPort: any): void {
-    console.log("Zooming", viewPort);
     const svgElement = this.el.nativeElement.querySelector("svg");
 
     // Get mouse position relative to the SVG
