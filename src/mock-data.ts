@@ -128,4 +128,42 @@ export const mockDarmstadtData: FeatureModel[] = [
       },
     },
   },
+  {
+    id: uuidv4(),
+    name: "Kieser Training",
+    ports: [
+      {
+        id: uuidv4(),
+        name: "Port 1",
+        location: "top",
+      },
+      {
+        id: uuidv4(),
+        name: "Port 2",
+        location: "right",
+      },
+    ],
+    elements: {
+      name: "Kieser Training",
+      myGeoJson: {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          coordinates: [
+            [
+              [8.636404427427891, 49.885202865971706],
+              [8.636632181298978, 49.88503815007701],
+              [8.637106281193041, 49.88550833759743],
+              [8.636976136124957, 49.885568233767856],
+              [8.636883175360708, 49.88557721818708],
+              [8.636687957757772, 49.88549935316536],
+              [8.636692605795048, 49.88546940504648],
+              [8.636404427427891, 49.885202865971706],
+            ],
+          ],
+          type: "Polygon",
+        },
+      },
+    },
+  },
 ];

@@ -35,13 +35,13 @@ import { svg } from "d3";
 })
 export class CustomSvgComponent {
   element = input<ElementData>(); // Assume ElementData includes myGeoJson property
-  width = input<number>();
-  height = input<number>();
+  width = input<number>(200);
+  height = input<number>(200);
   private sanitizer = inject(DomSanitizer);
 
   //Converter for the darmstadt grafenhauser map
   darmstadtConverter = new GeoJSON2SVG({
-    viewportSize: { width: this.width() ?? 200, height: this.height() ?? 200 },
+    viewportSize: { width: this.width(), height: this.height() },
     r: 10,
   });
 

@@ -92,7 +92,7 @@ export class SimpleVflowComponent implements AfterViewInit {
       id: feature.id,
       data: { feature },
       point: { x: xPixel - width / 2.5, y: yPixel - height / 2.5 },
-      draggable: this.isDraggable(),
+      draggable: true,
       height: height,
       width: width,
       type: "html-template",
@@ -222,7 +222,7 @@ export class SimpleVflowComponent implements AfterViewInit {
     if (!feature.elements.myGeoJson) {
       return [0, 0]; // Return default if no GeoJSON
     }
-
+    console.log("FeatureCentroid:", feature.name);
     // Check if the GeoJSON type is "Feature"
     if (feature.elements.myGeoJson.type === "Feature") {
       const geometry = feature.elements.myGeoJson.geometry;
@@ -231,7 +231,6 @@ export class SimpleVflowComponent implements AfterViewInit {
       if (geometry.type === "Polygon" || geometry.type === "MultiPolygon") {
         // Use turf.centroid to calculate the centroid
         const centroid = turf.centroid(feature.elements.myGeoJson);
-
         // Log the calculated centroid
         console.log("Calculated centroid:", centroid.geometry.coordinates);
 

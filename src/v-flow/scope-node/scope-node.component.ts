@@ -14,10 +14,6 @@ import { FeatureModel } from "../../model/feature.model";
 import { Port } from "../../model/port.model";
 import { ScopeNodeVPortComponent } from "./scope-node-port/scope-node-port.component";
 
-interface ScopeNodeData {
-  feature: FeatureModel;
-}
-
 @Component({
   selector: "custom-node ",
   standalone: true,
@@ -26,15 +22,9 @@ interface ScopeNodeData {
   templateUrl: "./scope-node.component.html",
   styleUrls: ["./scope-node.component.scss"],
 })
-export class ScopeNodeComponent
-  extends CustomNodeComponent<ScopeNodeData>
-  implements OnInit
-{
+export class ScopeNodeComponent {
   nodeContext = input<any>();
 
-  override ngOnInit(): void {
-    console.log("ScopeNodeComponent", this.nodeContext());
-  }
   //Retrieve the data, so we can use it in html
   name = computed(() => this.nodeContext().node.data.feature.name);
 
