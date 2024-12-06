@@ -20,11 +20,6 @@ import { CustomSvgComponent } from "./custom-svg/custom-svg.component";
       xmlns="http://www.w3.org/2000/svg"
     >
       <image href="assets/grafen.png" alt="Grafen" class="grafen-image" />
-      <!--       @for(element of elements(); track $index) {
-
-      <svg:g custom-element [element]="element"></svg:g>
-
-      } -->
     </svg>
   `,
   styles: [

@@ -23,7 +23,6 @@ import {
   ConnectionSettings,
   NodeChange,
 } from "ngx-vflow";
-import { BackgroundSvgComponent } from "../background-svg/background-svg.component";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
 import { ScopeNodeComponent } from "./scope-node/scope-node.component";
@@ -38,7 +37,6 @@ import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     VflowModule,
-    BackgroundSvgComponent,
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
     ScopeNodeComponent,
