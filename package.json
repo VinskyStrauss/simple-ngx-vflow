@@ -22,7 +22,7 @@
     "d3": "^7.9.0",
     "geojson2svg": "^2.0.1",
     "ngx-drag-drop": "^18.0.2",
-    "ngx-vflow": "0.15.0",
+    "ngx-vflow": "0.16.0",
     "proj4": "^2.14.0",
     "reproject": "^1.2.7",
     "rxjs": "^7.8.1",

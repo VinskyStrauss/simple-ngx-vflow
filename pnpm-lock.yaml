@@ -54,8 +54,8 @@ importers:
         specifier: ^18.0.2
         version: 18.0.2(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))
       ngx-vflow:
-        specifier: 0.15.0
-        version: 0.15.0(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@types/d3-drag@3.0.7)(@types/d3-selection@3.0.11)(@types/d3-zoom@3.0.8)(d3-drag@3.0.0)(d3-selection@3.0.0)(d3-zoom@3.0.0)
+        specifier: 0.16.0
+        version: 0.16.0(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@types/d3-drag@3.0.7)(@types/d3-selection@3.0.11)(@types/d3-zoom@3.0.8)(d3-drag@3.0.0)(d3-selection@3.0.0)(d3-zoom@3.0.0)
       proj4:
         specifier: ^2.14.0
         version: 2.15.0
@@ -2481,11 +2481,11 @@ packages:
       '@angular/common': ^18.0.0
       '@angular/core': ^18.0.0
 
-  ngx-vflow@0.15.0:
-    resolution: {integrity: sha512-P6dtkMZOnpj1bMm6Ddl5vEYoCngj6R26WqDwQGQrWRwkQ5qmZIYs6mQMNyh2bw3bRB5AuRkEpQILnjlDrE5H1A==}
+  ngx-vflow@0.16.0:
+    resolution: {integrity: sha512-uh6g2+F7wjOEUj+D1X1ugh6tXyL/15eva59hVIs9zvSIh2fMiFO6VdHSEH8efvokpqz5l4/LX0fkCWkVO/P4tg==}
     peerDependencies:
-      '@angular/common': ^16.2.0 || 17.x || 18.x
-      '@angular/core': ^16.2.0 || 17.x || 18.x
+      '@angular/common': ^16.2.0 || 17.x || 18.x || 19.x
+      '@angular/core': ^16.2.0 || 17.x || 18.x || 19.x
       '@types/d3-drag': ^3.0.7
       '@types/d3-selection': ^3.0.10
       '@types/d3-zoom': ^3.0.8
@@ -6271,7 +6271,7 @@ snapshots:
       '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
       tslib: 2.8.0
 
-  ngx-vflow@0.15.0(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@types/d3-drag@3.0.7)(@types/d3-selection@3.0.11)(@types/d3-zoom@3.0.8)(d3-drag@3.0.0)(d3-selection@3.0.0)(d3-zoom@3.0.0):
+  ngx-vflow@0.16.0(@angular/common@19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(@types/d3-drag@3.0.7)(@types/d3-selection@3.0.11)(@types/d3-zoom@3.0.8)(d3-drag@3.0.0)(d3-selection@3.0.0)(d3-zoom@3.0.0):
     dependencies:
       '@angular/common': 19.0.0(@angular/core@19.0.0(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
       '@angular/core': 19.0.0(rxjs@7.8.1)(zone.js@0.15.0)
