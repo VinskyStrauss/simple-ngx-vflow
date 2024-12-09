@@ -22,6 +22,7 @@ import {
   Background,
   ConnectionSettings,
   NodeChange,
+  ImageBackground,
 } from "ngx-vflow";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
@@ -65,6 +66,11 @@ export class SimpleVflowComponent implements AfterViewInit {
   backGround: Background = {
     type: "solid",
     color: "transparent",
+  };
+  imgBackground: ImageBackground = {
+    type: "image",
+    src: "assets/angle-right.svg",
+    scale: 1,
   };
 
   connectionSetting: ConnectionSettings = {
