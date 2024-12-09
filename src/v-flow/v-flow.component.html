@@ -2,7 +2,7 @@
   <!--   <button (click)="toggleDraggable()">
     {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
   </button> -->
-  <!-- <grafen-background-svg #svgBackground></grafen-background-svg> -->
+  <grafen-background-svg #svgBackground></grafen-background-svg>
   <vflow
     #vflow
     view="auto"
@@ -11,11 +11,7 @@
     [connection]="connectionSetting"
     [nodes]="nodes"
     [edges]="edges"
-    [background]="{
-      type: 'image',
-      src: 'src/assets/angle-right.svg',
-      scale: 1
-    }"
+    [background]="background"
     [maxZoom]="25"
     [minZoom]="-25"
   >

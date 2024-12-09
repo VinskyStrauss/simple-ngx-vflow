@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   input,
+  OnInit,
   output,
 } from "@angular/core";
 
@@ -16,6 +17,7 @@ import {
         class="without-tab-index"
         [attr.d]="ctx.path()"
         [attr.stroke]="ctx.selected() ? '#0f4c75' : '#bbe1fa'"
+        [attr.marker-end]="ctx.markerEnd()"
         fill="none"
         stroke-width="5"
         tabindex="0"
@@ -40,6 +42,9 @@ import {
       }
     `,
 })
-export class ScopeEdgeFlowComponent {
+export class ScopeEdgeFlowComponent implements OnInit {
   edgeContext = input<any>();
+  ngOnInit(): void {
+    console.log("Edge initialized", this.edgeContext());
+  }
 }

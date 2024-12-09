@@ -63,14 +63,14 @@ export class SimpleVflowComponent implements AfterViewInit {
     console.log("Draggable", this.isDraggable());
   }
 
-  backGround: Background = {
+  background: Background = {
     type: "solid",
     color: "transparent",
   };
   imgBackground: ImageBackground = {
     type: "image",
     src: "assets/angle-right.svg",
-    scale: 1,
+    scale: 0.05,
   };
 
   connectionSetting: ConnectionSettings = {
@@ -98,7 +98,7 @@ export class SimpleVflowComponent implements AfterViewInit {
       id: feature.id,
       data: { feature },
       point: { x: xPixel - width / 2.5, y: yPixel - height / 2.5 },
-      draggable: true,
+      draggable: this.isDraggable(),
       height: height,
       width: width,
       type: "html-template",
@@ -122,7 +122,9 @@ export class SimpleVflowComponent implements AfterViewInit {
   public connect({ source, sourceHandle, targetHandle, target }: Connection) {
     console.log("Connect");
     console.log("Source", source);
+    console.log("SourceHandle", sourceHandle);
     console.log("Target", target);
+    console.log("TargetHandle", targetHandle);
     this.edges = [
       ...this.edges,
       {
@@ -245,11 +247,10 @@ export class SimpleVflowComponent implements AfterViewInit {
     }
     return [0, 0]; // Return default if no valid polygon found
   }
-  @ViewChild("vflowContainer", { static: false }) vflowContainer!: ElementRef; // Reference to the vflow container element
   @ViewChild("vflow") vflow!: VflowComponent;
   @ViewChild("svgBackground") svgBackground!: GrafenHauserComponent;
   ngAfterViewInit() {
-    console.log("Vflow container:", this.vflowContainer);
+    console.log("Vflow", this.vflow);
     // Attach the wheel event listener to the native element
     this.vflow.viewportChange$.forEach((viewport) => {
       this.svgBackground.zoom(viewport);
