@@ -69,7 +69,7 @@ export class SimpleVflowComponent implements AfterViewInit {
   };
   imgBackground: ImageBackground = {
     type: "image",
-    src: "assets/angle-right.svg",
+    src: "src/assets/angle-right.svg",
     scale: 0.05,
   };
 

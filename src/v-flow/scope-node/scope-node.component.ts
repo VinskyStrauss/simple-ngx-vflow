@@ -25,6 +25,10 @@ import { ScopeNodeVPortComponent } from "./scope-node-port/scope-node-port.compo
 export class ScopeNodeComponent {
   nodeContext = input<any>();
 
+  //Get the viewbox
+  getViewBox(): string {
+    return `0 0 ${this.width()} ${this.height()}`;
+  }
   //Retrieve the data, so we can use it in html
   name = computed(() => this.nodeContext().node.data.feature.name);
 

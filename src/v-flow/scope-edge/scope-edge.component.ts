@@ -14,7 +14,7 @@ import {
     <ng-container>
       <svg:path
         selectable
-        class="without-tab-index"
+        class="animate-path"
         [attr.d]="ctx.path()"
         [attr.stroke]="ctx.selected() ? '#0f4c75' : '#bbe1fa'"
         [attr.marker-end]="ctx.markerEnd()"
