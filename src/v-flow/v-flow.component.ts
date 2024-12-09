@@ -97,7 +97,7 @@ export class SimpleVflowComponent implements AfterViewInit {
     return {
       id: feature.id,
       data: { feature },
-      point: { x: xPixel - width / 2.5, y: yPixel - height / 2.5 },
+      point: { x: xPixel - width / 1.5, y: yPixel - height / 1.5 },
       draggable: this.isDraggable(),
       height: height,
       width: width,

@@ -2,13 +2,18 @@
   <div
     class="node"
     [style]="{
-      '--node-width': width() + 'px',
-      '--node-height': height() + 'px'
+      '--node-width': width() * 1.5 + 'px',
+      '--node-height': height() * 1.5 + 'px'
     }"
   >
     <div class="node-info">
       @if(nodeContext().node.data.feature.elements) {
-      <svg width="100%" height="100%" viewBox="0 0 200 200">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 150 150"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g
           custom-element
           [width]="width()"
@@ -18,7 +23,7 @@
       </svg>
       }
     </div>
-    <p>{{ name() }}</p>
+
     <div class="portsLeft">
       <eta-scope-node-ports
         [nodePorts]="leftPorts()"
