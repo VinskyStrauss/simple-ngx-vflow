@@ -77,6 +77,17 @@ export class SimpleVflowComponent implements AfterViewInit {
     mode: "loose",
   };
 
+  //Width and height of the container
+  height = 1069;
+  width = 1220;
+  // Map extent for case Darmstadt
+  mapExtent = {
+    left: 8.634022529410913, // Longitude for top-left corner
+    bottom: 49.8835094952137, // Latitude for bottom-right corner
+    right: 8.638534952430376, // Longitude for bottom-right corner
+    top: 49.88613737107883, // Latitude for top-left corner
+  };
+
   public nodes: Node[] = [
     // Map the nodes from the input data
     ...this.mockData.map((feature) => {
@@ -151,17 +162,9 @@ export class SimpleVflowComponent implements AfterViewInit {
   public onPositionChange(changes: NodeChange[]) {
     console.log("Position change", changes);
   }
+
   //Calculate the width and height of the node
   private calculateNodeSize(feature: FeatureModel) {
-    const height = 1069;
-    const width = 1220;
-    // Map extent for case Darmstadt
-    const mapExtent = {
-      left: 8.634022529410913, // Longitude for top-left corner
-      bottom: 49.8835094952137, // Latitude for bottom-right corner
-      right: 8.638534952430376, // Longitude for bottom-right corner
-      top: 49.88613737107883, // Latitude for top-left corner
-    };
     if (!feature.elements.myGeoJson) {
       return { width: 500, height: 500 };
     }
@@ -185,10 +188,12 @@ export class SimpleVflowComponent implements AfterViewInit {
         const maxPolygonLng = Math.max(...longitudes);
         const minPolygonLat = Math.min(...latitudes);
         const maxPolygonLat = Math.max(...latitudes);
-
+        console.log("Right:", this.mapExtent.right);
         // Calculate scaling factors
-        const scaleX = width / (mapExtent.right - mapExtent.left); // Pixels per degree longitude
-        const scaleY = height / (mapExtent.top - mapExtent.bottom); // Pixels per degree latitude
+        const scaleX =
+          this.width / (this.mapExtent.right - this.mapExtent.left); // Pixels per degree longitude
+        const scaleY =
+          this.height / (this.mapExtent.top - this.mapExtent.bottom); // Pixels per degree latitude
 
         // Calculate pixel dimensions of the polygon
         const pixelWidth = (maxPolygonLng - minPolygonLng) * scaleX;
@@ -204,24 +209,17 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   //Calculate the coordinate of the feature in ngx-vflow
   private calculateCoordinate(feature: FeatureModel) {
-    const height = 1069;
-    const width = 1220;
-    // Map extent for case Darmstadt
-    const mapExtent = {
-      left: 8.634022529410913, // Longitude for top-left corner
-      bottom: 49.8835094952137, // Latitude for bottom-right corner
-      right: 8.638534952430376, // Longitude for bottom-right corner
-      top: 49.88613737107883, // Latitude for top-left corner
-    };
     const [centroidX, centroidY] = this.calculatePolygonCentroid(feature);
     // Calculations
     const xPixel =
-      ((centroidX - mapExtent.left) / (mapExtent.right - mapExtent.left)) *
-      width;
+      ((centroidX - this.mapExtent.left) /
+        (this.mapExtent.right - this.mapExtent.left)) *
+      this.width;
     const yPixel =
-      height -
-      ((centroidY - mapExtent.bottom) / (mapExtent.top - mapExtent.bottom)) *
-        height;
+      this.height -
+      ((centroidY - this.mapExtent.bottom) /
+        (this.mapExtent.top - this.mapExtent.bottom)) *
+        this.height;
     console.log("Calculated coordinates:", { xPixel, yPixel });
     return { xPixel, yPixel };
   }
