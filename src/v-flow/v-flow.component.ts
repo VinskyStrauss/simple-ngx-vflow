@@ -144,7 +144,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         sourceHandle,
         target,
         targetHandle,
-        curve: "straight",
+        curve: "bezier",
         type: "template",
         markers: {
           end: {
