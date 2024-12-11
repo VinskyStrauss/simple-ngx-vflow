@@ -14,7 +14,7 @@ import {
     <ng-container>
       <svg:path
         selectable
-        class="animate-path"
+        class="animate-path main-path"
         [attr.d]="ctx.path()"
         [attr.stroke]="color"
         [attr.marker-end]="ctx.markerEnd()"
@@ -23,23 +23,44 @@ import {
         tabindex="0"
         (keydown.backspace)="ctx.selected()"
       />
+      <svg:path
+        selectable
+        class="animate-path moving-stroke"
+        [attr.d]="ctx.path()"
+        stroke="white"
+        fill="none"
+        stroke-width="3"
+        [attr.stroke-dasharray]="ctx.strokeDasharray || '100'"
+        [attr.stroke-dashoffset]="ctx.strokeDashoffset || '200'"
+        tabindex="-1"
+      />
     </ng-container>
+
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   styles: `
-      .animate-path {
-        stroke-dasharray: 100; /* High value to ensure the dash covers the entire path */
-        stroke-dashoffset: 200; /* Initially, the path is not visible */
-        animation: draw-path 2s linear infinite; /* 2-second animation to draw the path */
+    /* Style for the main path based on color */
+    .main-path {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Animated moving white stroke */
+    .moving-stroke {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 100; /* Matches the length of the path */
+      stroke-dashoffset: 200; /* Initially offset */
+      animation: move-white-stroke 2s linear infinite;
+    }
+
+    @keyframes move-white-stroke {
+      to {
+        stroke-dashoffset: 0; /* Move the stroke along the path */
       }
-  
-      @keyframes draw-path {
-        to {
-          stroke-dashoffset: 0; /* Animate to 0 to make the path visible from start to end */
-        }
-      }
+    }
     `,
 })
 export class ScopeEdgeFlowComponent implements OnInit {
