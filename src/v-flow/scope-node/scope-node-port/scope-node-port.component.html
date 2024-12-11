@@ -1,4 +1,4 @@
-@let ports = nodePorts(); @if (ports) {
+@let ports = processedPorts(); @if (ports) {
 <div class="ports">
   @for (port of ports; track $index) {
   <div class="port">

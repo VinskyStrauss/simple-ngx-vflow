@@ -33,6 +33,7 @@ import * as turf from "@turf/turf";
 import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
 import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.component";
 import { color } from "d3";
+import { PortTypeColors } from "../model/port-type.model";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -160,7 +161,7 @@ export class SimpleVflowComponent implements AfterViewInit {
     if (!sourcePort || !targetPort) {
       return;
     }
-    if (sourcePort.color !== targetPort.color) {
+    if (sourcePort.type !== targetPort.type) {
       console.log("Invalid connection");
       return;
     }
@@ -174,7 +175,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         targetHandle,
         curve: "bezier",
         type: "template",
-        data: { color: sourcePort.color },
+        data: { color: PortTypeColors[sourcePort.type] },
         markers: {
           end: {
             type: "arrow-closed",

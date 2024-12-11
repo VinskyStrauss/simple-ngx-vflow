@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   inject,
   input,
@@ -11,6 +12,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { VflowModule } from "ngx-vflow";
 import { fromEvent, take } from "rxjs";
 import { Port } from "../../../model/port.model";
+import { PortType, PortTypeColors } from "../../../model/port-type.model";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
@@ -23,6 +25,13 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 })
 export class ScopeNodeVPortComponent {
   nodePorts = input<Port[]>();
+
+  processedPorts = computed(() =>
+    (this.nodePorts() || []).map((port) => ({
+      ...port,
+      color: PortTypeColors[port.type], // Dynamically assign color
+    }))
+  );
   editMode = input<boolean>();
   position = input<"top" | "left" | "right">("left");
   destroyRef = inject(DestroyRef);
