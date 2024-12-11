@@ -4,6 +4,7 @@ import {
   DestroyRef,
   inject,
   input,
+  OnInit,
   signal,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -24,7 +25,6 @@ export class ScopeNodeVPortComponent {
   nodePorts = input<Port[]>();
   editMode = input<boolean>();
   position = input<"top" | "left" | "right">("left");
-
   destroyRef = inject(DestroyRef);
 
   handleClicked = signal(false);

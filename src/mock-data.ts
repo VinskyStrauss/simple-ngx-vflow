@@ -10,21 +10,25 @@ export const mockDarmstadtData: FeatureModel[] = [
         id: uuidv4(),
         name: "Port 1",
         location: "left",
+        color: "red",
       },
       {
         id: uuidv4(),
         name: "Port 2",
         location: "left",
+        color: "blue",
       },
       {
         id: uuidv4(),
         name: "Port 3",
         location: "right",
+        color: "green",
       },
       {
         id: uuidv4(),
         name: "Port 4",
         location: "top",
+        color: "yellow",
       },
     ],
     elements: {
@@ -61,16 +65,19 @@ export const mockDarmstadtData: FeatureModel[] = [
         id: uuidv4(),
         name: "Port 1",
         location: "top",
+        color: "yellow",
       },
       {
         id: uuidv4(),
         name: "Port 2",
         location: "right",
+        color: "green",
       },
       {
         id: uuidv4(),
         name: "Port 3",
         location: "right",
+        color: "blue",
       },
     ],
     elements: {
@@ -101,11 +108,13 @@ export const mockDarmstadtData: FeatureModel[] = [
         id: uuidv4(),
         name: "Port 1",
         location: "top",
+        color: "yellow",
       },
       {
         id: uuidv4(),
         name: "Port 2",
         location: "right",
+        color: "green",
       },
     ],
     elements: {
@@ -136,11 +145,13 @@ export const mockDarmstadtData: FeatureModel[] = [
         id: uuidv4(),
         name: "Port 1",
         location: "top",
+        color: "yellow",
       },
       {
         id: uuidv4(),
         name: "Port 2",
         location: "right",
+        color: "green",
       },
     ],
     elements: {

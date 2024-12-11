@@ -32,6 +32,7 @@ import { mockDarmstadtData } from "../mock-data";
 import * as turf from "@turf/turf";
 import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
 import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.component";
+import { color } from "d3";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -136,6 +137,33 @@ export class SimpleVflowComponent implements AfterViewInit {
     console.log("SourceHandle", sourceHandle);
     console.log("Target", target);
     console.log("TargetHandle", targetHandle);
+    //Find the source Feature
+    const sourceFeature = this.mockData.find(
+      (feature) => feature.id === source
+    );
+
+    //Find the source port
+    const sourcePort = sourceFeature?.ports.find(
+      (port) => port.id === sourceHandle
+    );
+
+    //Find the target Feature
+    const targetFeature = this.mockData.find(
+      (feature) => feature.id === target
+    );
+    //Find  the target port
+    const targetPort = targetFeature?.ports.find(
+      (port) => port.id === targetHandle
+    );
+    console.log("SourcePort", sourcePort);
+    console.log("TargetPort", targetPort);
+    if (!sourcePort || !targetPort) {
+      return;
+    }
+    if (sourcePort.color !== targetPort.color) {
+      console.log("Invalid connection");
+      return;
+    }
     this.edges = [
       ...this.edges,
       {
@@ -146,6 +174,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         targetHandle,
         curve: "bezier",
         type: "template",
+        data: { color: sourcePort.color },
         markers: {
           end: {
             type: "arrow-closed",
