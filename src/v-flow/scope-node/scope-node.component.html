@@ -7,7 +7,7 @@
     }"
   >
     <div class="node-info">
-      @if(nodeContext().node.data.feature.elements) {
+      @if(nodeContext().node.data.element.elements) {
       <svg
         width="100%"
         height="100%"
@@ -18,7 +18,7 @@
           custom-element
           [width]="width()"
           [height]="height()"
-          [element]="nodeContext().node.data.feature.elements!"
+          [element]="nodeContext().node.data.element.elements!"
         ></g>
       </svg>
       }
@@ -44,4 +44,8 @@
       ></eta-scope-node-ports>
     </div>
   </div>
+  <eta-scope-node-feature
+    [width]="width()"
+    [featuresData]="nodeContext().node.data.element.features"
+  ></eta-scope-node-feature>
 </div>

@@ -10,21 +10,29 @@ import {
 import { CustomNodeComponent } from "ngx-vflow";
 import { CustomSvgComponent } from "../../background-svg/custom-svg/custom-svg.component";
 import { ElementData } from "../../model/element-data.model";
-import { FeatureModel } from "../../model/feature.model";
+import { ElementModel } from "../../model/element.model";
 import { Port } from "../../model/port.model";
 import { ScopeNodeVPortComponent } from "./scope-node-port/scope-node-port.component";
+import { ScopeNodeFeatureComponent } from "./scope-node-feature/scope-node-feature.component";
 
 @Component({
   selector: "custom-node ",
   standalone: true,
-  imports: [CustomSvgComponent, ScopeNodeVPortComponent],
+  imports: [
+    CustomSvgComponent,
+    ScopeNodeVPortComponent,
+    ScopeNodeFeatureComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./scope-node.component.html",
   styleUrls: ["./scope-node.component.scss"],
 })
-export class ScopeNodeComponent {
+export class ScopeNodeComponent implements OnInit {
   nodeContext = input<any>();
 
+  ngOnInit(): void {
+    console.log("Node Context", this.nodeContext());
+  }
   //Get the viewbox
   getViewBox(): string {
     return `0 0 ${this.width()} ${this.height()}`;
@@ -37,7 +45,7 @@ export class ScopeNodeComponent {
   height = computed(() => this.nodeContext().node.height);
   //Get tge port
   ports: Signal<Port[] | undefined> = computed(
-    () => this.nodeContext().node.data.feature.ports
+    () => this.nodeContext().node.data.element.ports
   );
 
   leftPorts: Signal<Port[] | undefined> = computed(() =>

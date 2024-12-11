@@ -1,7 +1,7 @@
-import { FeatureModel } from "./model/feature.model";
+import { ElementModel } from "./model/element.model";
 import { v4 as uuidv4 } from "uuid"; // Import UUID generation function
 
-export const mockDarmstadtData: FeatureModel[] = [
+export const mockDarmstadtData: ElementModel[] = [
   {
     id: uuidv4(),
     name: "Etalytics",
@@ -56,6 +56,20 @@ export const mockDarmstadtData: FeatureModel[] = [
         },
       },
     },
+    features: [
+      {
+        id: uuidv4(),
+        name: "Electricity",
+        icon: "home", // Correct icon name for a bold icon
+        unit: "kWh",
+      },
+      {
+        id: uuidv4(),
+        name: "Water Cooling",
+        icon: "mode_fan",
+        unit: "cfm",
+      },
+    ],
   },
   {
     id: uuidv4(),

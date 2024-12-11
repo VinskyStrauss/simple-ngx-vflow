@@ -60,10 +60,7 @@ export class CustomSvgComponent {
     //Convert with turf
     // Optionally convert GeoJSON from WGS84 format to EPSG:900913 (Mercator)
     const convertedToMercator = toMercator(myGeoJSON);
-    console.log("Converted to Mercator", convertedToMercator);
     const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
-    console.log("SVGPaths", svgPaths);
-
     const scaleFactor = 1;
 
     // Translate to reposition after scaling

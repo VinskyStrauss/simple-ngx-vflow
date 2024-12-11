@@ -27,7 +27,7 @@ import {
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
 import { ScopeNodeComponent } from "./scope-node/scope-node.component";
-import { FeatureModel } from "../model/feature.model";
+import { ElementModel } from "../model/element.model";
 import { mockDarmstadtData } from "../mock-data";
 import * as turf from "@turf/turf";
 import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
@@ -92,9 +92,9 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   public nodes: Node[] = [
     // Map the nodes from the input data
-    ...this.mockData.map((feature) => {
-      console.log("Mapping feature to node:", feature); // Log the feature being processed
-      const node = this.createNode(feature); // Create the node
+    ...this.mockData.map((element) => {
+      console.log("Mapping element to node:", element); // Log the element being processed
+      const node = this.createNode(element); // Create the node
       console.log("Created node:", node); // Log the created node
       return node;
     }),
@@ -103,13 +103,13 @@ export class SimpleVflowComponent implements AfterViewInit {
   public edges: Edge[] = [];
 
   //Create Node
-  public createNode(feature: FeatureModel): Node {
-    //Calculate the coordinate of the feature
-    const { xPixel, yPixel } = this.calculateCoordinate(feature);
-    const { width, height } = this.calculateNodeSize(feature);
+  public createNode(element: ElementModel): Node {
+    //Calculate the coordinate of the element
+    const { xPixel, yPixel } = this.calculateCoordinate(element);
+    const { width, height } = this.calculateNodeSize(element);
     return {
-      id: feature.id,
-      data: { feature },
+      id: element.id,
+      data: { element },
       point: { x: xPixel - width / 1.75, y: yPixel - height / 1.75 },
       draggable: this.isDraggable(),
       height: height,
@@ -156,8 +156,6 @@ export class SimpleVflowComponent implements AfterViewInit {
     const targetPort = targetFeature?.ports.find(
       (port) => port.id === targetHandle
     );
-    console.log("SourcePort", sourcePort);
-    console.log("TargetPort", targetPort);
     if (!sourcePort || !targetPort) {
       return;
     }
@@ -194,7 +192,7 @@ export class SimpleVflowComponent implements AfterViewInit {
   }
 
   //Calculate the width and height of the node
-  private calculateNodeSize(feature: FeatureModel) {
+  private calculateNodeSize(feature: ElementModel) {
     if (!feature.elements.myGeoJson) {
       return { width: 500, height: 500 };
     }
@@ -218,7 +216,6 @@ export class SimpleVflowComponent implements AfterViewInit {
         const maxPolygonLng = Math.max(...longitudes);
         const minPolygonLat = Math.min(...latitudes);
         const maxPolygonLat = Math.max(...latitudes);
-        console.log("Right:", this.mapExtent.right);
         // Calculate scaling factors
         const scaleX =
           this.width / (this.mapExtent.right - this.mapExtent.left); // Pixels per degree longitude
@@ -228,8 +225,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         // Calculate pixel dimensions of the polygon
         const pixelWidth = (maxPolygonLng - minPolygonLng) * scaleX;
         const pixelHeight = (maxPolygonLat - minPolygonLat) * scaleY;
-        console.log("Feature:", feature.name);
-        console.log("Calculated dimensions:", { pixelWidth, pixelHeight });
+
         return { width: pixelWidth, height: pixelHeight };
       }
     }
@@ -238,7 +234,7 @@ export class SimpleVflowComponent implements AfterViewInit {
   }
 
   //Calculate the coordinate of the feature in ngx-vflow
-  private calculateCoordinate(feature: FeatureModel) {
+  private calculateCoordinate(feature: ElementModel) {
     const [centroidX, centroidY] = this.calculatePolygonCentroid(feature);
     // Calculations
     const xPixel =
@@ -250,15 +246,15 @@ export class SimpleVflowComponent implements AfterViewInit {
       ((centroidY - this.mapExtent.bottom) /
         (this.mapExtent.top - this.mapExtent.bottom)) *
         this.height;
-    console.log("Calculated coordinates:", { xPixel, yPixel });
+
     return { xPixel, yPixel };
   }
 
-  private calculatePolygonCentroid(feature: FeatureModel): [number, number] {
+  private calculatePolygonCentroid(feature: ElementModel): [number, number] {
     if (!feature.elements.myGeoJson) {
       return [0, 0]; // Return default if no GeoJSON
     }
-    console.log("FeatureCentroid:", feature.name);
+
     // Check if the GeoJSON type is "Feature"
     if (feature.elements.myGeoJson.type === "Feature") {
       const geometry = feature.elements.myGeoJson.geometry;
@@ -267,8 +263,6 @@ export class SimpleVflowComponent implements AfterViewInit {
       if (geometry.type === "Polygon" || geometry.type === "MultiPolygon") {
         // Use turf.centroid to calculate the centroid
         const centroid = turf.centroid(feature.elements.myGeoJson);
-        // Log the calculated centroid
-        console.log("Calculated centroid:", centroid.geometry.coordinates);
 
         return centroid.geometry.coordinates as [number, number];
       }
