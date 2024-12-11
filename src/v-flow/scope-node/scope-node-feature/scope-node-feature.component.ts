@@ -21,6 +21,7 @@ export class ScopeNodeFeatureComponent implements OnInit {
   featuresData = input<FeatureModel[]>([]);
   width = input<number>(200);
   ngOnInit(): void {
+    console.log("Width", this.width());
     console.log("Features in Scope Features", this.featuresData());
   }
 }

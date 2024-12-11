@@ -1,9 +1,8 @@
 @let features = featuresData(); @if(features){
 <table
   mat-table
-  [style]="{
-    '--node-width': width() * 1.25 + 'px',
-  }"
+  class="feature-table"
+  [style]="{ width: width() * 1.25 + 'px' }"
   [dataSource]="features"
 >
   <!-- Icon Column -->

@@ -1,0 +1,16 @@
+.feature-table {
+  background-color: white;
+  border: 2px solid black;
+}
+
+th {
+  font-size: 10px; /* existing style */
+  height: 20px; /* Set a specific height for header */
+  line-height: 20px; /* To center the text vertically */
+}
+
+td {
+  font-size: 10px; /* existing style */
+  height: 20px; /* Set a specific height for table data */
+  line-height: 20px; /* To center the text vertically */
+}

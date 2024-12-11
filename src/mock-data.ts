@@ -113,6 +113,20 @@ export const mockDarmstadtData: ElementModel[] = [
         },
       },
     },
+    features: [
+      {
+        id: uuidv4(),
+        name: "Electricity",
+        icon: "home", // Correct icon name for a bold icon
+        unit: "kWh",
+      },
+      {
+        id: uuidv4(),
+        name: "Water Heating",
+        icon: "hot_tub",
+        unit: "°C",
+      },
+    ],
   },
   {
     id: uuidv4(),
@@ -190,5 +204,19 @@ export const mockDarmstadtData: ElementModel[] = [
         },
       },
     },
+    features: [
+      {
+        id: uuidv4(),
+        name: "Electricity",
+        icon: "home", // Correct icon name for a bold icon
+        unit: "kWh",
+      },
+      {
+        id: uuidv4(),
+        name: "Water Heating",
+        icon: "hot_tub",
+        unit: "°C",
+      },
+    ],
   },
 ];
