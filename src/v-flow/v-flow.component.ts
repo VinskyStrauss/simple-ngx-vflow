@@ -107,10 +107,18 @@ export class SimpleVflowComponent implements AfterViewInit {
     //Calculate the coordinate of the element
     const { xPixel, yPixel } = this.calculateCoordinate(element);
     const { width, height } = this.calculateNodeSize(element);
+    let { translateX, translateY } = { translateX: 0, translateY: 0 };
+    if (width < 100) {
+      translateX = width / 2;
+      translateY = height / 2;
+    } else {
+      translateX = width / 1.75;
+      translateY = height / 1.75;
+    }
     return {
       id: element.id,
       data: { element },
-      point: { x: xPixel - width / 1.75, y: yPixel - height / 1.75 },
+      point: { x: xPixel - translateX, y: yPixel - translateY },
       draggable: this.isDraggable(),
       height: height,
       width: width,
