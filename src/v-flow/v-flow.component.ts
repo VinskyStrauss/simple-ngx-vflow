@@ -160,7 +160,7 @@ export class SimpleVflowComponent implements AfterViewInit {
       return;
     }
     if (sourcePort.type !== targetPort.type) {
-      console.log("Invalid connection");
+      console.error("Invalid connection");
       return;
     }
     this.edges = [
