@@ -11,10 +11,7 @@ import {
 import { ElementData } from "../../model/element-data.model";
 import { GeoJSON2SVG } from "geojson2svg";
 import { DomSanitizer } from "@angular/platform-browser";
-import reproject from "reproject";
-import proj4 from "proj4";
-import { toMercator, toWgs84 } from "@turf/projection";
-import { svg } from "d3";
+import { toMercator } from "@turf/projection";
 
 @Component({
   selector: "svg:g[custom-element]",
@@ -40,16 +37,14 @@ export class CustomSvgComponent {
   private sanitizer = inject(DomSanitizer);
 
   //Converter for the darmstadt grafenhauser map
-  darmstadtConverter = new GeoJSON2SVG({
-    viewportSize: { width: this.width(), height: this.height() },
-    r: 10,
-  });
+  darmstadtConverter = new GeoJSON2SVG({});
 
   // Reactive accessor for GeoJSON data
   myGeoJson = computed(() => this.element()?.myGeoJson);
 
   // Generate SVG path data from GeoJSON and render it as SVG
   mySvg = computed(() => {
+    console.log("Width in custom SVG", this.width());
     console.log(this.myGeoJson());
     //Transforming the GeoJson coordinates to pixel coordinates
     const myGeoJSON = this.myGeoJson() as any;
@@ -61,7 +56,10 @@ export class CustomSvgComponent {
     // Optionally convert GeoJSON from WGS84 format to EPSG:900913 (Mercator)
     const convertedToMercator = toMercator(myGeoJSON);
     const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
-    const scaleFactor = 1;
+    let scaleFactor = 1;
+    if (this.width() < 100) {
+      scaleFactor = 0.7;
+    }
 
     // Translate to reposition after scaling
     const transformedSvg = `

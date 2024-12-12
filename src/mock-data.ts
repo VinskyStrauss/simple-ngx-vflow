@@ -205,4 +205,41 @@ export const mockDarmstadtData: ElementModel[] = [
       },
     },
   },
+  {
+    id: uuidv4(),
+    name: "No. 15",
+    ports: [
+      {
+        id: uuidv4(),
+        name: "Port 1",
+        location: "top",
+        type: "Electricity",
+      },
+      {
+        id: uuidv4(),
+        name: "Port 2",
+        location: "right",
+        type: "Heating",
+      },
+    ],
+    elements: {
+      name: "No. 15",
+      myGeoJson: {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          coordinates: [
+            [
+              [8.63607144269011, 49.88430587542956],
+              [8.636246682177102, 49.88425797308756],
+              [8.636283854190054, 49.88431614021053],
+              [8.63611126984597, 49.88436575328976],
+              [8.63607144269011, 49.88430587542956],
+            ],
+          ],
+          type: "Polygon",
+        },
+      },
+    },
+  },
 ];
