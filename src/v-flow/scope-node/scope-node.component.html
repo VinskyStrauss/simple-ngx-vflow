@@ -44,6 +44,9 @@
       ></eta-scope-node-ports>
     </div>
   </div>
+  <div class="node-name">
+    <span>{{ name() }}</span>
+  </div>
   <eta-scope-node-feature
     [width]="width()"
     [featuresData]="nodeContext().node.data.element.features"

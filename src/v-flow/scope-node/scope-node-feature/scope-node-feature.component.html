@@ -1,10 +1,5 @@
 @let features = featuresData(); @if(features){
-<table
-  mat-table
-  class="feature-table"
-  [style]="{ width: width() * 1.25 + 'px' }"
-  [dataSource]="features"
->
+<table mat-table class="feature-table" [dataSource]="features">
   <!-- Icon Column -->
   <ng-container matColumnDef="icon">
     <th mat-header-cell *matHeaderCellDef>Icon</th>

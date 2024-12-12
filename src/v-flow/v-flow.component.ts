@@ -186,11 +186,6 @@ export class SimpleVflowComponent implements AfterViewInit {
     ];
   }
 
-  //Console.log the position change
-  public onPositionChange(changes: NodeChange[]) {
-    console.log("Position change", changes);
-  }
-
   //Calculate the width and height of the node
   private calculateNodeSize(feature: ElementModel) {
     if (!feature.elements.myGeoJson) {

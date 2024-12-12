@@ -38,7 +38,7 @@ export class ScopeNodeComponent implements OnInit {
     return `0 0 ${this.width()} ${this.height()}`;
   }
   //Retrieve the data, so we can use it in html
-  name = computed(() => this.nodeContext().node.data.feature.name);
+  name = computed(() => this.nodeContext().node.data.element.name);
 
   //Node width and height
   width = computed(() => this.nodeContext().node.width);
