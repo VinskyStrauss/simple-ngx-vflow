@@ -58,7 +58,7 @@ export class CustomSvgComponent {
     const svgPaths = this.darmstadtConverter.convert(convertedToMercator);
     let scaleFactor = 1;
     if (this.width() < 100) {
-      scaleFactor = 0.75;
+      scaleFactor = 0.7;
     }
 
     // Translate to reposition after scaling
