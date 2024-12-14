@@ -35,6 +35,7 @@ import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.comp
 import { color } from "d3";
 import { PortTypeColors } from "../model/port-type.model";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from "@angular/material/tooltip";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -44,6 +45,7 @@ import { MatIconModule } from "@angular/material/icon";
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
     ScopeNodeComponent,
+    MatTooltipModule,
     MatIconModule,
   ],
   templateUrl: "./v-flow.component.html",
@@ -61,14 +63,18 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   resourceEffect = effect(() => {
     console.log("Resource Effect");
+    //Create the nodes and put it in the vNodes
+    this.vNodes.set(
+      this.mockData.map((element) => {
+        const node = this.createNode(element);
+        return node;
+      })
+    );
     this.isDraggable();
   });
 
   toggleDraggable() {
     this.isDraggable.set(!this.isDraggable());
-    this.nodes.forEach((node) => {
-      node.draggable = this.isDraggable();
-    });
     console.log("Draggable", this.isDraggable());
   }
 
@@ -96,16 +102,6 @@ export class SimpleVflowComponent implements AfterViewInit {
     right: 8.638534952430376, // Longitude for bottom-right corner
     top: 49.88613737107883, // Latitude for top-left corner
   };
-
-  public nodes: Node[] = [
-    // Map the nodes from the input data
-    ...this.mockData.map((element) => {
-      console.log("Mapping element to node:", element); // Log the element being processed
-      const node = this.createNode(element); // Create the node
-      console.log("Created node:", node); // Log the created node
-      return node;
-    }),
-  ];
 
   public edges: Edge[] = [];
 
@@ -135,7 +131,7 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   //Delete Node
   public deleteNode({ id }: Node) {
-    this.nodes = this.nodes.filter((node) => node.id !== id);
+    this.vNodes.set(this.vNodes().filter((node) => node.id !== id));
     this.edges = this.edges.filter(
       (edge) => edge.source !== id && edge.target !== id
     );

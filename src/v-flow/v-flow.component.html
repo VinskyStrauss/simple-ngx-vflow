@@ -1,10 +1,10 @@
 <div class="diagram">
   <div class="toolbar">
-    <button (click)="toggleDraggable()">
-      <mat-icon>{{ isDraggable() ? "lock" : "lock_open" }}</mat-icon>
+    <button mat-button (click)="toggleDraggable()">
+      <mat-icon [matTooltip]="isDraggable() ? 'Lock drag' : 'Unlock drag'">
+        {{ isDraggable() ? "lock" : "lock_open" }}
+      </mat-icon>
     </button>
-    <mat-icon>zoom_in</mat-icon>
-    <mat-icon svgIcon="home"></mat-icon>
   </div>
   <div #vflowContainer class="vflow-container">
     <grafen-background-svg #svgBackground></grafen-background-svg>
@@ -13,7 +13,7 @@
       view="auto"
       (onConnect)="connect($event)"
       [connection]="connectionSetting"
-      [nodes]="nodes"
+      [nodes]="vNodes()"
       [edges]="edges"
       [background]="background"
       [maxZoom]="25"
