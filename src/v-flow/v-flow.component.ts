@@ -23,6 +23,7 @@ import {
   ConnectionSettings,
   NodeChange,
   ImageBackground,
+  NodePositionChange,
 } from "ngx-vflow";
 import { GrafenHauserComponent } from "../background-svg/grafenhauser-svg.component";
 import { darmstadtElements } from "../darmstadt-data";
@@ -127,6 +128,30 @@ export class SimpleVflowComponent implements AfterViewInit {
       width: width,
       type: "html-template",
     };
+  }
+
+  // Node Position Change
+  public nodeChange(nodeChanges: NodePositionChange[]) {
+    console.log("Node Changes:", nodeChanges);
+
+    // Iterate through all the node changes
+    nodeChanges.forEach((change) => {
+      const node = this.vNodes().find((node) => node.id === change.id);
+
+      if (node) {
+        // Update the node's position only if a valid point exists
+        if (change.point) {
+          node.point = change.point;
+        }
+
+        console.log("Updated Node:", node);
+      } else {
+        console.warn(`Node with ID ${change.id} not found`);
+      }
+    });
+
+    // Update the vNodes observable or reactive signal
+    this.vNodes.set([...this.vNodes()]);
   }
 
   //Delete Node

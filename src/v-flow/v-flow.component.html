@@ -12,6 +12,7 @@
       #vflow
       view="auto"
       (onConnect)="connect($event)"
+      (onNodesChange.position)="nodeChange($event)"
       [connection]="connectionSetting"
       [nodes]="vNodes()"
       [edges]="edges"
