@@ -4,6 +4,21 @@
   height: 100%;
 }
 
+.diagram {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 3px;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 30px;
+  width: 100%;
+}
 .vflow-container {
   position: relative;
   width: 1220px;

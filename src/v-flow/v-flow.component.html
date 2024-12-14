@@ -1,24 +1,30 @@
-<div #vflowContainer class="vflow-container">
-  <!--   <button (click)="toggleDraggable()">
-    {{ isDraggable() ? "Lock Movement" : "Unlock Movement" }}
-  </button> -->
-  <grafen-background-svg #svgBackground></grafen-background-svg>
-  <vflow
-    #vflow
-    view="auto"
-    (onConnect)="connect($event)"
-    [connection]="connectionSetting"
-    [nodes]="nodes"
-    [edges]="edges"
-    [background]="background"
-    [maxZoom]="25"
-    [minZoom]="-25"
-  >
-    <ng-template nodeHtml let-ctx>
-      <custom-node [nodeContext]="ctx" />
-    </ng-template>
-    <ng-template edge let-ctx>
-      <svg:g eta-edge [edgeContext]="ctx" />
-    </ng-template>
-  </vflow>
+<div class="diagram">
+  <div class="toolbar">
+    <button (click)="toggleDraggable()">
+      <mat-icon>{{ isDraggable() ? "lock" : "lock_open" }}</mat-icon>
+    </button>
+    <mat-icon>zoom_in</mat-icon>
+    <mat-icon svgIcon="home"></mat-icon>
+  </div>
+  <div #vflowContainer class="vflow-container">
+    <grafen-background-svg #svgBackground></grafen-background-svg>
+    <vflow
+      #vflow
+      view="auto"
+      (onConnect)="connect($event)"
+      [connection]="connectionSetting"
+      [nodes]="nodes"
+      [edges]="edges"
+      [background]="background"
+      [maxZoom]="25"
+      [minZoom]="-25"
+    >
+      <ng-template nodeHtml let-ctx>
+        <custom-node [nodeContext]="ctx" />
+      </ng-template>
+      <ng-template edge let-ctx>
+        <svg:g eta-edge [edgeContext]="ctx" />
+      </ng-template>
+    </vflow>
+  </div>
 </div>

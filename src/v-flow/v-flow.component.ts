@@ -34,6 +34,7 @@ import { ScopeEdgeFlowComponent } from "./scope-edge/scope-edge.component";
 import { CustomSvgComponent } from "../background-svg/custom-svg/custom-svg.component";
 import { color } from "d3";
 import { PortTypeColors } from "../model/port-type.model";
+import { MatIconModule } from "@angular/material/icon";
 @Component({
   selector: "app-vflow",
   standalone: true,
@@ -43,6 +44,7 @@ import { PortTypeColors } from "../model/port-type.model";
     GrafenHauserComponent,
     ScopeEdgeFlowComponent,
     ScopeNodeComponent,
+    MatIconModule,
   ],
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
@@ -56,6 +58,11 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   //Dragggable
   isDraggable = signal<boolean>(false);
+
+  resourceEffect = effect(() => {
+    console.log("Resource Effect");
+    this.isDraggable();
+  });
 
   toggleDraggable() {
     this.isDraggable.set(!this.isDraggable());
