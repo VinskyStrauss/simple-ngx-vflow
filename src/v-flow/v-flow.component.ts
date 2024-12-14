@@ -169,11 +169,6 @@ export class SimpleVflowComponent implements AfterViewInit {
   }
 
   public connect({ source, sourceHandle, targetHandle, target }: Connection) {
-    console.log("Connect");
-    console.log("Source", source);
-    console.log("SourceHandle", sourceHandle);
-    console.log("Target", target);
-    console.log("TargetHandle", targetHandle);
     //Find the source Feature
     const sourceFeature = this.mockData.find(
       (feature) => feature.id === source
