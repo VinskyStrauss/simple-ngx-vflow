@@ -55,13 +55,14 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 export class SimpleVflowComponent implements AfterViewInit {
   //vFlow nodes
   vNodes = signal<Node[]>([]);
+  private nodePositions: { [key: string]: { x: number; y: number } } = {};
   readonly darmstadtElements = darmstadtElements;
 
   readonly mockData = mockDarmstadtData;
 
   //Dragggable
   isDraggable = signal<boolean>(false);
-
+  isInitialized = false;
   resourceEffect = effect(() => {
     console.log("Resource Effect");
     //Create the nodes and put it in the vNodes
@@ -71,6 +72,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         return node;
       })
     );
+    this.isInitialized = true;
     this.isDraggable();
   });
 
@@ -108,7 +110,6 @@ export class SimpleVflowComponent implements AfterViewInit {
 
   //Create Node
   public createNode(element: ElementModel): Node {
-    //Calculate the coordinate of the element
     const { xPixel, yPixel } = this.calculateCoordinate(element);
     const { width, height } = this.calculateNodeSize(element);
     let { translateX, translateY } = { translateX: 0, translateY: 0 };
@@ -119,10 +120,17 @@ export class SimpleVflowComponent implements AfterViewInit {
       translateX = width / 1.75;
       translateY = height / 1.75;
     }
+
+    // Use stored position if available
+    const position = this.nodePositions[element.id] || {
+      x: xPixel - translateX,
+      y: yPixel - translateY,
+    };
+
     return {
       id: element.id,
       data: { element },
-      point: { x: xPixel - translateX, y: yPixel - translateY },
+      point: position,
       draggable: this.isDraggable(),
       height: height,
       width: width,
@@ -134,14 +142,17 @@ export class SimpleVflowComponent implements AfterViewInit {
   public nodeChange(nodeChanges: NodePositionChange[]) {
     console.log("Node Changes:", nodeChanges);
 
-    // Iterate through all the node changes
     nodeChanges.forEach((change) => {
       const node = this.vNodes().find((node) => node.id === change.id);
 
       if (node) {
-        // Update the node's position only if a valid point exists
         if (change.point) {
           node.point = change.point;
+          // Store the new position
+          this.nodePositions[change.id] = {
+            x: change.point.x,
+            y: change.point.y,
+          };
         }
 
         console.log("Updated Node:", node);
@@ -150,7 +161,6 @@ export class SimpleVflowComponent implements AfterViewInit {
       }
     });
 
-    // Update the vNodes observable or reactive signal
     this.vNodes.set([...this.vNodes()]);
   }
 
