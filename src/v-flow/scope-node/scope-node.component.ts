@@ -7,7 +7,11 @@ import {
   OnInit,
   Signal,
 } from "@angular/core";
-import { CustomNodeComponent } from "ngx-vflow";
+import {
+  CustomNodeComponent,
+  ResizableComponent,
+  VflowModule,
+} from "ngx-vflow";
 import { CustomSvgComponent } from "../../background-svg/custom-svg/custom-svg.component";
 import { ElementData } from "../../model/element-data.model";
 import { ElementModel } from "../../model/element.model";
@@ -22,6 +26,7 @@ import { ScopeNodeFeatureComponent } from "./scope-node-feature/scope-node-featu
     CustomSvgComponent,
     ScopeNodeVPortComponent,
     ScopeNodeFeatureComponent,
+    VflowModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./scope-node.component.html",
