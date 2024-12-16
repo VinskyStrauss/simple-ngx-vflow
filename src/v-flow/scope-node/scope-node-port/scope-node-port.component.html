@@ -9,11 +9,10 @@
       [template]="handleTemplate"
     />
     <ng-template #handleTemplate let-ctx>
-      <svg:rect
-        [attr.x]="ctx.point().x - 6"
-        [attr.y]="ctx.point().y - 6"
-        [attr.width]="12"
-        [attr.height]="12"
+      <svg:circle
+        [attr.cx]="ctx.point().x"
+        [attr.cy]="ctx.point().y"
+        [attr.r]="6"
         stroke-width="1"
         [attr.stroke]="port.color"
         [attr.fill]="port.color"
