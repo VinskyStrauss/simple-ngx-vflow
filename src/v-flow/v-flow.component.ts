@@ -212,7 +212,7 @@ export class SimpleVflowComponent implements AfterViewInit {
         sourceHandle,
         target,
         targetHandle,
-        curve: "bezier",
+        curve: "smooth-step",
         type: "template",
         data: { color: PortTypeColors[sourcePort.type] },
         markers: {
