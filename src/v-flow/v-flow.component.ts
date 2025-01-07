@@ -52,7 +52,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
   templateUrl: "./v-flow.component.html",
   styleUrl: "./v-flow.component.scss",
 })
-export class SimpleVflowComponent implements AfterViewInit {
+export class SimpleVflowComponent {
   //vFlow nodes
   vNodes = signal<Node[]>([]);
   private nodePositions: { [key: string]: { x: number; y: number } } = {};
@@ -87,8 +87,9 @@ export class SimpleVflowComponent implements AfterViewInit {
   };
   imgBackground: ImageBackground = {
     type: "image",
-    src: "src/assets/angle-right.svg",
-    scale: 0.05,
+    src: "assets/grafen.png",
+    scale: 1,
+    repeat: false,
   };
 
   connectionSetting: ConnectionSettings = {
@@ -304,14 +305,5 @@ export class SimpleVflowComponent implements AfterViewInit {
       }
     }
     return [0, 0]; // Return default if no valid polygon found
-  }
-  @ViewChild("vflow") vflow!: VflowComponent;
-  @ViewChild("svgBackground") svgBackground!: GrafenHauserComponent;
-  ngAfterViewInit() {
-    console.log("Vflow", this.vflow);
-    // Attach the wheel event listener to the native element
-    this.vflow.viewportChange$.forEach((viewport) => {
-      this.svgBackground.zoom(viewport);
-    });
   }
 }

@@ -7,7 +7,7 @@
     </button>
   </div>
   <div #vflowContainer class="vflow-container">
-    <grafen-background-svg #svgBackground></grafen-background-svg>
+    <!-- <grafen-background-svg #svgBackground></grafen-background-svg> -->
     <vflow
       #vflow
       view="auto"
@@ -16,7 +16,7 @@
       [connection]="connectionSetting"
       [nodes]="vNodes()"
       [edges]="edges"
-      [background]="background"
+      [background]="imgBackground"
       [maxZoom]="25"
       [minZoom]="-25"
     >
